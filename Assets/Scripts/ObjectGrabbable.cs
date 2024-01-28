@@ -29,11 +29,11 @@ public class ObjectGrabbable : MonoBehaviour
         transform.parent = null;
 
     }
-    private void FixedUpdate() 
+    private void Update() 
     { 
         if (GrabPoint != null)
         {
-            //rb.transform.rotation = Quaternion.Euler(0f,0f,0f);
+            rb.transform.rotation = Quaternion.Euler(0f,0f,0f);
             Vector3 targetPosition = GrabPoint.position;
 
             // Smoothly move the object towards the target position
