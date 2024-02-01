@@ -3,10 +3,10 @@ using System.Collections;
 
 namespace LiquidVolumeFX {
 				
-				public class LiquidLevelPouringSync : MonoBehaviour {
+	public class LiquidLevelPouringSync : MonoBehaviour {
 
-								public float fillSpeed = 0.01f;
-								public float sinkFactor = 0.1f;
+		public float fillSpeed = 0.01f;
+		public float sinkFactor = 0.1f;
 								LiquidVolume lv;
 								Rigidbody rb;
 
