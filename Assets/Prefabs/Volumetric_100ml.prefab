@@ -137,7 +137,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.17855306, y: 0.12460528, z: 0.1822212}
-  m_Center: {x: -0.0018928455, y: 0.10727898, z: 0.00023131362}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6802283960164423972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +175,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!1 &4637642263496076333
 GameObject:
@@ -288,6 +288,8 @@ Transform:
   m_Children:
   - {fileID: 7717395366239307239}
   - {fileID: 8381823052224418249}
+  - {fileID: 6807307906304812166}
+  - {fileID: 6442890427403142282}
   m_Father: {fileID: 7706413992106330574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8602083491544054295
@@ -377,10 +379,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _topology: 10
-  _detail: 11
-  _level: 0.5
+  _detail: 51
+  _level: 0.1
   _levelMultiplier: 1
-  _liquidLayers: []
+  _liquidLayers:
+  - layerName: Layer 0
+    amount: 0
+    density: 1
+    color: {r: 0.83137256, g: 0.94509804, b: 0.9764706, a: 0.02745098}
+    miscible: 0
+    murkiness: 0
+    murkColor: {r: 1, g: 1, b: 1, a: 1}
+    scale: 0.3
+    viscosity: 1
+    adjustmentSpeed: 1
+    bubblesOpacity: 1
+    baseLevel: 0
+    currentBaseLevel: 0
+    currentAmount: 0
+    currentColor: {r: 0.83137256, g: 0.94509804, b: 0.9764706, a: 0.02745098}
+    currentMurkiness: 0
+    currentColor2: {r: 1, g: 1, b: 1, a: 1}
+    currentBubblesOpacity: 1
+  - layerName: Layer 1
+    amount: 0.1
+    density: 1
+    color: {r: 0.7445838, g: 0.7685516, b: 0.75569713, a: 0.5}
+    miscible: 0
+    murkiness: 0.5
+    murkColor: {r: 0, g: 0, b: 0, a: 1}
+    scale: 0.3
+    viscosity: 1
+    adjustmentSpeed: 1
+    bubblesOpacity: 1
+    baseLevel: 0
+    currentBaseLevel: 0
+    currentAmount: 0.1
+    currentColor: {r: 0.7445838, g: 0.7685516, b: 0.75569713, a: 0.5}
+    currentMurkiness: 0.5
+    currentColor2: {r: 0, g: 0, b: 0, a: 1}
+    currentBubblesOpacity: 1
   _smoothContactSurface: 3
   _ditherStrength: 0.5
   _layersAdjustmentSpeed: 1
@@ -669,6 +707,68 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 51571fd8cc5d60f4dbd18f2ab15695ab, type: 3}
+--- !u!1 &5551024279689843259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6807307906304812166}
+  m_Layer: 0
+  m_Name: TopLevel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6807307906304812166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5551024279689843259}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.08096, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3088265913717448521}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7247791286338404325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6442890427403142282}
+  m_Layer: 0
+  m_Name: BottomLevel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6442890427403142282
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7247791286338404325}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.08096, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3088265913717448521}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7516620962322736187
 GameObject:
   m_ObjectHideFlags: 0

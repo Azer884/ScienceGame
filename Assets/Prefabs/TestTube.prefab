@@ -106,6 +106,37 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: ac6aeb249cf1f5f45beb6537c41912be, type: 3}
+--- !u!1 &5233733214887708193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6127457089697807070}
+  m_Layer: 0
+  m_Name: TopLevel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6127457089697807070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5233733214887708193}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0547, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 655601027410674692}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6366716745917942225
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,6 +172,8 @@ Transform:
   m_Children:
   - {fileID: 2968589998249379066}
   - {fileID: 5109234541408169749}
+  - {fileID: 6127457089697807070}
+  - {fileID: 234173727497772400}
   m_Father: {fileID: 9086609702457745836}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3572294793542116882
@@ -218,10 +251,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _topology: 1
-  _detail: 11
-  _level: 0.5
+  _detail: 51
+  _level: 0.2501
   _levelMultiplier: 1
-  _liquidLayers: []
+  _liquidLayers:
+  - layerName: Layer 1
+    amount: 0
+    density: 1
+    color: {r: 0.83137256, g: 0.94509804, b: 0.9764706, a: 0.02745098}
+    miscible: 1
+    murkiness: 0
+    murkColor: {r: 1, g: 1, b: 1, a: 1}
+    scale: 0.3
+    viscosity: 1
+    adjustmentSpeed: 1
+    bubblesOpacity: 0
+    baseLevel: 0
+    currentBaseLevel: 0
+    currentAmount: 0.2501
+    currentColor: {r: 0.22577958, g: 0.012401298, b: 0.7842143, a: 0.49981108}
+    currentMurkiness: 0.49980012
+    currentColor2: {r: 0.00039984006, g: 0.00039984006, b: 0.00039984006, a: 1}
+    currentBubblesOpacity: 0
+  - layerName: Layer 0
+    amount: 0.25
+    density: 1
+    color: {r: 0.22553733, g: 0.012028219, b: 0.78413737, a: 0.5}
+    miscible: 1
+    murkiness: 0.5
+    murkColor: {r: 0, g: 0, b: 0, a: 1}
+    scale: 0.3
+    viscosity: 1
+    adjustmentSpeed: 1
+    bubblesOpacity: 1
+    baseLevel: 0
+    currentBaseLevel: 0
+    currentAmount: 0.2501
+    currentColor: {r: 0.22577958, g: 0.012401298, b: 0.7842143, a: 0.49981108}
+    currentMurkiness: 0.49980012
+    currentColor2: {r: 0.00039984006, g: 0.00039984006, b: 0.00039984006, a: 1}
+    currentBubblesOpacity: 0
   _smoothContactSurface: 3
   _ditherStrength: 0.5
   _layersAdjustmentSpeed: 1
@@ -251,7 +320,7 @@ MonoBehaviour:
   _foamWeight: 10
   _foamTurbulence: 1
   _foamVisibleFromBottom: 1
-  _smokeEnabled: 1
+  _smokeEnabled: 0
   _smokeColor: {r: 0.7, g: 0.7, b: 0.7, a: 0.25}
   _smokeScale: 0.25
   _smokeBaseObscurance: 2
@@ -478,6 +547,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 069da6216f32ebe46b07120fdccfaf0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6926824847068966612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 234173727497772400}
+  m_Layer: 0
+  m_Name: BottomLevel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &234173727497772400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6926824847068966612}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.0625, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 655601027410674692}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7845972373895116976
 GameObject:
   m_ObjectHideFlags: 0
@@ -5373,7 +5473,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.21001646, y: 0.12460528, z: 0.21005444}
-  m_Center: {x: 0.0029476774, y: 0.10727899, z: 0.0020464151}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5358422350153239653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5411,5 +5511,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 10
   m_CollisionDetection: 0
