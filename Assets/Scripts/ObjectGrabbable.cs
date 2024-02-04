@@ -8,9 +8,13 @@ public class ObjectGrabbable : MonoBehaviour
 
     private Rigidbody rb;
     private Transform GrabPoint;
+    private Transform player;
+    private Transform Cam;
     private void Awake() 
     {
         rb = GetComponent<Rigidbody>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        Cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     public void Grab(Transform GrabPoint)
@@ -33,9 +37,9 @@ public class ObjectGrabbable : MonoBehaviour
     { 
         if (GrabPoint != null)
         {
-            rb.transform.rotation = Quaternion.Euler(0f,0f,0f);
+            transform.rotation = player.rotation;
             Vector3 targetPosition = GrabPoint.position;
-
+            
             // Smoothly move the object towards the target position
             transform.position = targetPosition;
         }

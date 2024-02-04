@@ -397,14 +397,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _topology: 10
   _detail: 51
-  _level: 0.1
+  _level: 0.43
   _levelMultiplier: 1
   _liquidLayers:
   - layerName: Layer 0
-    amount: 0
+    amount: 0.33
     density: 1
     color: {r: 0.83137256, g: 0.94509804, b: 0.9764706, a: 0.02745098}
-    miscible: 0
+    miscible: 1
     murkiness: 0
     murkColor: {r: 1, g: 1, b: 1, a: 1}
     scale: 0.3
@@ -413,16 +413,16 @@ MonoBehaviour:
     bubblesOpacity: 1
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0
-    currentColor: {r: 0.83137256, g: 0.94509804, b: 0.9764706, a: 0.02745098}
-    currentMurkiness: 0
-    currentColor2: {r: 1, g: 1, b: 1, a: 1}
-    currentBubblesOpacity: 1
+    currentAmount: 0.43
+    currentColor: {r: 0.7274964, g: 0.82939357, b: 0.7563352, a: 0.1373461}
+    currentMurkiness: 0.11627907
+    currentColor2: {r: 0.76744187, g: 0.76744187, b: 0.76744187, a: 1}
+    currentBubblesOpacity: 0
   - layerName: Layer 1
     amount: 0.1
     density: 1
     color: {r: 0.3847049, g: 0.44756848, b: 0.029888157, a: 0.5}
-    miscible: 0
+    miscible: 1
     murkiness: 0.5
     murkColor: {r: 0, g: 0, b: 0, a: 1}
     scale: 0.3
@@ -431,11 +431,11 @@ MonoBehaviour:
     bubblesOpacity: 1
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0.1
-    currentColor: {r: 0.3847049, g: 0.44756848, b: 0.029888157, a: 0.5}
-    currentMurkiness: 0.5
-    currentColor2: {r: 0, g: 0, b: 0, a: 1}
-    currentBubblesOpacity: 1
+    currentAmount: 0.43
+    currentColor: {r: 0.7274964, g: 0.82939357, b: 0.7563352, a: 0.1373461}
+    currentMurkiness: 0.11627907
+    currentColor2: {r: 0.76744187, g: 0.76744187, b: 0.76744187, a: 1}
+    currentBubblesOpacity: 0
   _smoothContactSurface: 3
   _ditherStrength: 0.5
   _layersAdjustmentSpeed: 1
@@ -521,9 +521,9 @@ MonoBehaviour:
   _physicsMass: 1
   _physicsAngularDamp: 0.02
   _bubblesAmount: 32
-  _bubblesSizeMin: 2
-  _bubblesSizeMax: 4
-  _bubblesScale: 3
+  _bubblesSizeMin: 1
+  _bubblesSizeMax: 1
+  _bubblesScale: 0
   _bubblesBrightness: 1
   _bubblesVerticalSpeed: 1
   _bubblesSeed: 1
@@ -543,6 +543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 933917822807175263}
+  - component: {fileID: 5884344689771537302}
   - component: {fileID: 268646248298356534}
   - component: {fileID: 5425840236377617612}
   m_Layer: 0
@@ -567,6 +568,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2713491317364284217}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5884344689771537302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6049366265570826917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573d95c92609f9943b76b0eb672f0a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &268646248298356534
 ParticleSystem:
   m_ObjectHideFlags: 0

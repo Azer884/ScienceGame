@@ -248,6 +248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5001350603458558081}
+  - component: {fileID: 7396837642262127234}
   - component: {fileID: 2655146208933367833}
   - component: {fileID: 6175016603414866917}
   m_Layer: 0
@@ -272,6 +273,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2989257179088873124}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7396837642262127234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4938356058769258827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573d95c92609f9943b76b0eb672f0a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &2655146208933367833
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5337,9 +5350,9 @@ MonoBehaviour:
   _physicsMass: 1
   _physicsAngularDamp: 0.02
   _bubblesAmount: 32
-  _bubblesSizeMin: 2
-  _bubblesSizeMax: 4
-  _bubblesScale: 3
+  _bubblesSizeMin: 1
+  _bubblesSizeMax: 1
+  _bubblesScale: 0
   _bubblesBrightness: 1
   _bubblesVerticalSpeed: 1
   _bubblesSeed: 1
