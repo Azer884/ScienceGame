@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using LiquidVolumeFX;
 using UnityEditor.Animations;
+using System;
+using UnityEngine.UIElements;
 
 public class PouringSystem : MonoBehaviour
 {
     private LiquidVolume liquid;
-    private float Multiplayer = .2f;
     private ParticleSystem particleSystem;
 
 
@@ -23,9 +24,13 @@ public class PouringSystem : MonoBehaviour
     {
         if (Vector3.Angle(Vector3.down, transform.parent.forward) <= 65f || Vector3.Angle(Vector3.down, transform.parent.right) <= 65f || Vector3.Angle(Vector3.down, -transform.parent.forward) <= 65f || Vector3.Angle(Vector3.down, -transform.parent.right) <= 65f)
         {
-            liquid.level -= Multiplayer * Time.deltaTime;
+            for (int i = 0; i < liquid.liquidLayers.Length; i++)
+            {
+                liquid.liquidLayers[i].amount -= Time.deltaTime * liquid.liquidLayers[i].amount * 0.75f;
+                liquid.UpdateLayers(true);
+            }
 
-            if (liquid.level <= 0.02f)
+            if (LiquidCheck(liquid))
             {
                 particleSystem.Stop();
             }
@@ -38,7 +43,8 @@ public class PouringSystem : MonoBehaviour
         {
             particleSystem.Stop();
         }
-        if (liquid.level <= 0.02f)
+
+        if (LiquidCheck(liquid))
         {
             liquid.alpha = 0f;
         }
@@ -46,5 +52,23 @@ public class PouringSystem : MonoBehaviour
         {
             liquid.alpha = 1f;
         }
+    }
+
+    bool LiquidCheck(LiquidVolume lv)
+    {
+        bool level = true;
+        for (int i = 0; i < lv.liquidLayers.Length; i++)
+        {
+            if (lv.liquidLayers[i].amount <= 0.02f)
+            {
+                level = true;
+            }
+            else
+            {
+                level = false;
+                break;
+            }
+        }
+        return level;
     }
 }
