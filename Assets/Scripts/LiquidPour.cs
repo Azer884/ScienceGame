@@ -8,7 +8,6 @@ public class LiquidPour : MonoBehaviour
 
     	private float fillSpeed = 0.01f;
         private LiquidVolume lv;
-        private Vector3 thePosition;
 
         private float yMax;
     // Start is called before the first frame update
@@ -18,8 +17,7 @@ public class LiquidPour : MonoBehaviour
         yMax = transform.parent.Find("TopLevel").localPosition.y;
     }
     private void Update() {
-        transform.localPosition = new Vector3(0f, WaterCheckPos(lv,yMax), 0f);
-        transform.localRotation = Quaternion.Euler (0, 0, 0);
+        transform.SetLocalPositionAndRotation(new Vector3(0f, WaterCheckPos(lv,yMax), 0f), Quaternion.Euler (0, 0, 0));
     }
 
     void OnParticleCollision(GameObject other)

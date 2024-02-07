@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using LiquidVolumeFX;
-using UnityEditor.Animations;
-using System;
-using UnityEngine.UIElements;
 
 public class PouringSystem : MonoBehaviour
 {
@@ -22,11 +19,18 @@ public class PouringSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Angle(Vector3.down, transform.parent.forward) <= 65f || Vector3.Angle(Vector3.down, transform.parent.right) <= 65f || Vector3.Angle(Vector3.down, -transform.parent.forward) <= 65f || Vector3.Angle(Vector3.down, -transform.parent.right) <= 65f)
+        if (Vector3.Angle(Vector3.down, transform.parent.forward) <= 55f || Vector3.Angle(Vector3.down, transform.parent.right) <= 55f || Vector3.Angle(Vector3.down, -transform.parent.forward) <= 55f || Vector3.Angle(Vector3.down, -transform.parent.right) <= 55f)
         {
             for (int i = 0; i < liquid.liquidLayers.Length; i++)
             {
-                liquid.liquidLayers[i].amount -= Time.deltaTime * liquid.liquidLayers[i].amount * 0.75f;
+                if(liquid.liquidLayers[i].amount > 0.15f)
+                {
+                    liquid.liquidLayers[i].amount -= Time.deltaTime * liquid.liquidLayers[i].amount * 0.75f;
+                }
+                else
+                {
+                    liquid.liquidLayers[i].amount -= Time.deltaTime * (liquid.liquidLayers[i].amount + .15f) * 0.75f;
+                }
                 liquid.UpdateLayers(true);
             }
 
