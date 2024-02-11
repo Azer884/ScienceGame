@@ -11,7 +11,8 @@ public class GrabSystem : MonoBehaviour
     private float xRot;
     public Transform armTarget;
 
-    private float Multi = 100f;
+    private float rotationSpeed = 5f;
+    private float targetXRot = 0f; // Target value for xRot
 
     private void Update()
     {
@@ -39,26 +40,14 @@ public class GrabSystem : MonoBehaviour
             
         }
 
-        if (Input.GetMouseButton(1))
-        {
-            xRot = Mathf.Clamp(xRot, 0f, 85f);
-            xRot += Time.deltaTime * Multi;
-            armTarget.localRotation = Quaternion.Euler(0f, 0f, xRot);
+        targetXRot = Input.GetMouseButton(1) ? 85f : 0f; // Set target value based on mouse button state
+        xRot = Mathf.Lerp(xRot, targetXRot, Time.deltaTime * rotationSpeed); // Smoothly interpolate xRot
+        
+        armTarget.localRotation = Quaternion.Euler(0f, 0f, xRot);
 
-            if(Object != null)
-            {
-                Object.transform.rotation = armTarget.rotation;
-            }
-        }
-        else
+        if (Object != null)
         {
-            xRot = Mathf.Clamp(xRot, 0f, 85f);
-            xRot -= Time.deltaTime * Multi;
-            armTarget.localRotation = Quaternion.Euler(0f, 0f, xRot);
-            if(Object != null)
-            {
-                Object.transform.rotation = armTarget.rotation;
-            }
+            Object.transform.rotation = armTarget.rotation;
         }
     }
 }

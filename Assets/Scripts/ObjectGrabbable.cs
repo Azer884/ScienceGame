@@ -23,6 +23,7 @@ public class ObjectGrabbable : MonoBehaviour
         this.GrabPoint = GrabPoint;
         rb.useGravity = false;
         transform.parent = GrabPoint;
+        rb.velocity = Vector3.zero;
 
     }
     public void Drop()
@@ -37,11 +38,10 @@ public class ObjectGrabbable : MonoBehaviour
     { 
         if (GrabPoint != null)
         {
-            transform.rotation = player.rotation;
             Vector3 targetPosition = GrabPoint.position;
             
-            // Smoothly move the object towards the target position
-            transform.position = targetPosition;
+
+            transform.position = targetPosition;   
         }
     }
 }
