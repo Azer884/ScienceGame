@@ -1641,7 +1641,7 @@ GameObject:
   - component: {fileID: 7654542495406199098}
   m_Layer: 0
   m_Name: End
-  m_TagString: Untagged
+  m_TagString: RedClip
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1736,7 +1736,7 @@ GameObject:
   - component: {fileID: 8052319360659360741}
   - component: {fileID: 3888238224768710706}
   m_Layer: 10
-  m_Name: Cable
+  m_Name: RedCable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1797,7 +1797,6 @@ MonoBehaviour:
   size: 0.025
   springForce: 200
   brakeLengthMultiplier: 2
-  minBrakeTime: 1
   start: {fileID: 2192678634976608402}
   end: {fileID: 3698876821864698661}
   connector0: {fileID: 6890014170831682372}

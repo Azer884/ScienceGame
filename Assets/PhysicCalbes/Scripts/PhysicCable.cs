@@ -14,9 +14,8 @@ namespace HPhysic
         [Header("Bahaviour")]
         [SerializeField, Min(1f)] private float springForce = 200;
         [SerializeField, Min(1f)] private float brakeLengthMultiplier = 2f;
-        [SerializeField, Min(0.1f)] private float minBrakeTime = 1f;
+
         private float brakeLength;
-        private float timeToBrake = 1f;
 
         [Header("Object to set")]
         [SerializeField, Required] private GameObject start;
