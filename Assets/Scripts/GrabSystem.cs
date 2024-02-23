@@ -1,31 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
-using NaughtyAttributes.Test;
+using TMPro;
 using UnityEngine;
 
 public class GrabSystem : MonoBehaviour
 {
     [SerializeField] private Transform PlayerCam;
-    [SerializeField] private Transform GrabPiont;
     [SerializeField] private LayerMask PickupLayer;
     [SerializeField] private LayerMask OutLineLayer;
     private ObjectGrabbable Object;
     private float xRot;
     public Transform armTarget;
 
-    private float rotationSpeed = 5f;
-    private float targetXRot = 0f; // Target value for xRot
+    private readonly float rotationSpeed = 5f;
+    private float targetXRot = 0f;
 
     public Outline LongNail;
     public Outline ShortNail;
+    private Transform Clip;
     public Transform[] TargetRedClips;
     public Transform[] TargetBlackClips;
+    [HideInInspector]public bool IsNail = false;
 
-    private int i = 0;
+
 
     private void Update()
     {
-        
+        SelectNail();
+        if (IsNail)
+        {
+            Object = null;
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             if(Object == null)
@@ -33,44 +39,39 @@ public class GrabSystem : MonoBehaviour
                 float pickUpDistance = 2f;
                 if (Physics.Raycast(PlayerCam.position, PlayerCam.forward, out RaycastHit raycastHit, pickUpDistance, PickupLayer))
                 {
-                    if (raycastHit.transform.TryGetComponent(out Object))
+                    if (raycastHit.transform.TryGetComponent(out Object) && !IsNail)
                     {
-                        Object.Grab(GrabPiont);
+                        Object.Grab(transform);
                     }
                 }
             }
         }
-        else if (Input.GetMouseButtonUp(0))
+            
+        else if (Input.GetMouseButtonUp(0) && !IsNail)
         {
             if(Object != null)
             {
                 Object.Drop();
             }
             Object = null;
-            
         }
 
-        SelectNail();
-
-        if (Object != null)
+        if (Object != null && !IsNail)
         {
             Object.transform.rotation = armTarget.rotation;
         }
-        if(transform.childCount != 0)
+
+        if(!IsNail)
         {
-            if(transform.GetChild(0).CompareTag("BlackClip") || transform.GetChild(0).CompareTag("RedClip")) return;
+            targetXRot = Input.GetMouseButton(1) ? 85f : 0f;
+            xRot = Mathf.Lerp(xRot, targetXRot, Time.deltaTime * rotationSpeed);
+
+            armTarget.localRotation = Quaternion.Euler(0f, 0f, xRot);
         }
-
-        targetXRot = Input.GetMouseButton(1) ? 85f : 0f;
-        xRot = Mathf.Lerp(xRot, targetXRot, Time.deltaTime * rotationSpeed);
-
-        armTarget.localRotation = Quaternion.Euler(0f, 0f, xRot);
-
-        
     }
 
 
-    void SelectNail()
+    public void SelectNail()
     {
         if(transform.childCount != 0)
 
@@ -79,34 +80,41 @@ public class GrabSystem : MonoBehaviour
             {
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _, 2f, OutLineLayer))
                 {
-
                     LongNail.enabled = true;
-                    
-                    /*if (Input.GetMouseButton(1))
+                    Clip = transform.GetChild(0);
+                    if(Input.GetKeyDown(KeyCode.Mouse1))
                     {
-                        transform.GetChild(0).transform.SetPositionAndRotation(TargetBlackClips[i].position, TargetBlackClips[i].rotation);
-                        i++;
-                    }*/
-
+                        IsNail = true;
+                        Clip.SetParent(TargetBlackClips[0]);
+                    }
+                    else
+                    {
+                        IsNail = false;
+                    }
                 }
                 else
                 {
                     LongNail.enabled = false;
                 }
             }
+
             else if (transform.GetChild(0).CompareTag("RedClip"))
             {
+
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _, 2f, OutLineLayer))
                 {
-
                     ShortNail.enabled = true;
 
-                    /*if (Input.GetMouseButton(1))
+                    Clip = transform.GetChild(0);
+                    if(Input.GetKeyDown(KeyCode.Mouse1))
+                    {       
+                        IsNail = true;
+                        Clip.SetParent(TargetBlackClips[0]);
+                    }
+                    else
                     {
-                        transform.GetChild(0).transform.SetPositionAndRotation(TargetBlackClips[i].position, TargetBlackClips[i].rotation);
-                        i++;
-                    }*/
-
+                        IsNail = false;
+                    }
                 }
                 else
                 {
@@ -114,10 +122,12 @@ public class GrabSystem : MonoBehaviour
                 }
             }
         }
+
         else
         {
             LongNail.enabled = false;
             ShortNail.enabled = false;
+            IsNail = false;
         }
     }
 }

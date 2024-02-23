@@ -7,41 +7,45 @@ public class ObjectGrabbable : MonoBehaviour
 {
 
     private Rigidbody rb;
-    private Transform GrabPoint;
+    [HideInInspector] public Transform GrabPoint;
     private Transform player;
     private Transform Cam;
+    private Transform OriginalParent;
     private void Awake() 
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         Cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        OriginalParent = transform.parent;
     }
 
     public void Grab(Transform GrabPoint)
     {
-        //rb.isKinematic = true;
+        rb.constraints = RigidbodyConstraints.None;
         this.GrabPoint = GrabPoint;
         rb.useGravity = false;
         transform.parent = GrabPoint;
         rb.velocity = Vector3.zero;
-
     }
     public void Drop()
     {
-        //rb.isKinematic = false;
+        rb.constraints = RigidbodyConstraints.None;
         GrabPoint = null;
         rb.useGravity = true;
-        transform.parent = null;
-
+        transform.parent = OriginalParent;
     }
     private void Update() 
     { 
         if (GrabPoint != null)
         {
-            Vector3 targetPosition = GrabPoint.position;
-            
-
-            transform.position = targetPosition;   
+            if (!GrabPoint.GetComponent<GrabSystem>().IsNail)
+            {
+                transform.position = GrabPoint.position;
+            }
+        }
+        if (transform.parent.CompareTag("ClipPos"))
+        {
+            transform.SetLocalPositionAndRotation(Vector3.zero , Quaternion.Euler(0f, 0f, 0f));
         }
     }
 }
