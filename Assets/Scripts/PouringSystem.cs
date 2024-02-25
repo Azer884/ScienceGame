@@ -36,16 +36,16 @@ public class PouringSystem : MonoBehaviour
 
             if (LiquidCheck(liquid))
             {
-                particleSystem.Stop();
+                particleSystem.gameObject.SetActive(false);
             }
             else
             {
-                particleSystem.Play();
+                particleSystem.gameObject.SetActive(true);
             }
         }
         else
         {
-            particleSystem.Stop();
+            particleSystem.gameObject.SetActive(false);
         }
 
         if (LiquidCheck(liquid))

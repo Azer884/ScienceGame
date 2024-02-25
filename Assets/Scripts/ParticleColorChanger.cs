@@ -10,14 +10,16 @@ public class ParticleColorChanger : MonoBehaviour
     private LiquidVolume liquid;
     private Color color;
 
+    [System.Obsolete]
     void Start()
     {
         particleSystem = gameObject.GetComponent<ParticleSystem>();
         liquid = gameObject.GetComponentInParent<LiquidVolume>();
+        particleSystem.startColor = AvgColor(liquid);
     }
 
     [System.Obsolete]
-    void LateUpdate() {
+    void Update() {
         particleSystem.startColor = AvgColor(liquid);
     }
     // Update is called once per frame
