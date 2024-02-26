@@ -6,7 +6,7 @@ using LiquidVolumeFX;
 public class ParticleColorChanger : MonoBehaviour
 {
     // Start is called before the first frame update
-    private ParticleSystem particleSystem;
+    private new ParticleSystem particleSystem;
     private LiquidVolume liquid;
     private Color color;
 

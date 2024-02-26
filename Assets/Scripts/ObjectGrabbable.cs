@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class ObjectGrabbable : MonoBehaviour
     private Transform player;
     private Transform Cam;
     private Transform OriginalParent;
+    [HideInInspector] public bool IsGrabbed = false; 
+    [HideInInspector] public bool IsClipOnNail = false;
     private void Awake() 
     {
         rb = GetComponent<Rigidbody>();
@@ -21,31 +24,45 @@ public class ObjectGrabbable : MonoBehaviour
 
     public void Grab(Transform GrabPoint)
     {
-        rb.constraints = RigidbodyConstraints.None;
         this.GrabPoint = GrabPoint;
         rb.useGravity = false;
-        transform.parent = GrabPoint;
         rb.velocity = Vector3.zero;
+        rb.constraints = RigidbodyConstraints.None;
+        //transform.parent = GrabPoint;
     }
     public void Drop()
     {
-        rb.constraints = RigidbodyConstraints.None;
         GrabPoint = null;
         rb.useGravity = true;
-        transform.parent = OriginalParent;
+        rb.velocity = Vector3.zero;
+        rb.constraints = RigidbodyConstraints.None;
+        //transform.parent = OriginalParent;
     }
     private void Update() 
     { 
         if (GrabPoint != null)
         {
-            if (!GrabPoint.GetComponent<GrabSystem>().IsNail)
+            if (IsGrabbed)
             {
                 transform.position = GrabPoint.position;
             }
         }
-        if (transform.parent.CompareTag("ClipPos"))
-        {
-            transform.SetLocalPositionAndRotation(Vector3.zero , Quaternion.Euler(0f, 0f, 0f));
+        if (IsClipOnNail)
+        {   
+            Transform[] targetBlackClips = GrabPoint.GetComponent<GrabSystem>().TargetBlackClips;
+            IsGrabbed = false;
+
+            Transform targetClip = targetBlackClips[0];
+            if (targetClip != null)
+            {
+                rb.useGravity = false;
+                rb.velocity = Vector3.zero;
+                rb.constraints = RigidbodyConstraints.FreezeAll;
+
+                // Set the position and rotation of the object smoothly
+                transform.position = Vector3.Lerp(transform.position, targetClip.position, Time.deltaTime * 60f);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetClip.rotation, Time.deltaTime * 60f);
+            }
         }
     }
 }

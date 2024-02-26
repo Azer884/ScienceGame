@@ -6,7 +6,7 @@ using LiquidVolumeFX;
 public class PouringSystem : MonoBehaviour
 {
     private LiquidVolume liquid;
-    private ParticleSystem particleSystem;
+    private new ParticleSystem particleSystem;
 
 
     // Start is called before the first frame update

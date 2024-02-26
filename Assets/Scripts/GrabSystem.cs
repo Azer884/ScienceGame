@@ -26,11 +26,6 @@ public class GrabSystem : MonoBehaviour
 
     private void Update()
     {
-        SelectNail();
-        if (IsNail)
-        {
-            Object = null;
-        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -42,6 +37,9 @@ public class GrabSystem : MonoBehaviour
                     if (raycastHit.transform.TryGetComponent(out Object) && !IsNail)
                     {
                         Object.Grab(transform);
+                        Object.IsGrabbed = true;
+                        Object.IsClipOnNail = false;
+
                     }
                 }
             }
@@ -52,7 +50,15 @@ public class GrabSystem : MonoBehaviour
             if(Object != null)
             {
                 Object.Drop();
+                Object.IsGrabbed = false;
+                Object.IsClipOnNail = false;     
             }
+            Object = null;
+        }
+
+        SelectNail();
+        if (IsNail)
+        {
             Object = null;
         }
 
@@ -73,19 +79,19 @@ public class GrabSystem : MonoBehaviour
 
     public void SelectNail()
     {
-        if(transform.childCount != 0)
+        if(Object != null && Object.IsGrabbed)
 
         {
-            if (transform.GetChild(0).CompareTag("BlackClip"))
+            if (Object.IsGrabbed && Object.CompareTag("BlackClip"))
             {
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _, 2f, OutLineLayer))
                 {
                     LongNail.enabled = true;
-                    Clip = transform.GetChild(0);
+                    Clip = Object.transform;
                     if(Input.GetKeyDown(KeyCode.Mouse1))
                     {
                         IsNail = true;
-                        Clip.SetParent(TargetBlackClips[0]);
+                        Object.IsClipOnNail = true;
                     }
                     else
                     {
@@ -98,18 +104,18 @@ public class GrabSystem : MonoBehaviour
                 }
             }
 
-            else if (transform.GetChild(0).CompareTag("RedClip"))
+            else if (Object.IsGrabbed && Object.CompareTag("RedClip"))
             {
 
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _, 2f, OutLineLayer))
                 {
                     ShortNail.enabled = true;
 
-                    Clip = transform.GetChild(0);
+                    Clip = Object.transform;
                     if(Input.GetKeyDown(KeyCode.Mouse1))
                     {       
                         IsNail = true;
-                        Clip.SetParent(TargetBlackClips[0]);
+                        Object.IsClipOnNail = true;
                     }
                     else
                     {
