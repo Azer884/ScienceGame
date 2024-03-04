@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2767da8e5ddcda648b630c2af56d6fba
+timeCreated: 1476506523
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Shader/Paint/PaintHeight.shader
+  uploadId: 224922

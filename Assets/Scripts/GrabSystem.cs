@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
+using LiquidVolumeFX;
 
 public class GrabSystem : MonoBehaviour
 {
@@ -17,10 +19,13 @@ public class GrabSystem : MonoBehaviour
 
     public Outline LongNail;
     public Outline ShortNail;
-    private Transform Clip;
+    private Outline NailPlace;
     public Transform[] TargetRedClips;
     public Transform[] TargetBlackClips;
     [HideInInspector]public bool IsNail = false;
+    public bool IsNailInPos = false;
+
+    private LiquidVolume lv;
 
 
 
@@ -34,7 +39,7 @@ public class GrabSystem : MonoBehaviour
                 float pickUpDistance = 2f;
                 if (Physics.Raycast(PlayerCam.position, PlayerCam.forward, out RaycastHit raycastHit, pickUpDistance, PickupLayer))
                 {
-                    if (raycastHit.transform.TryGetComponent(out Object) && !IsNail)
+                    if (raycastHit.transform.TryGetComponent(out Object) && !IsNail && !IsNailInPos)
                     {
                         Object.Grab(transform);
                         Object.IsGrabbed = true;
@@ -45,29 +50,31 @@ public class GrabSystem : MonoBehaviour
             }
         }
             
-        else if (Input.GetMouseButtonUp(0) && !IsNail)
+        else if (Input.GetMouseButtonUp(0) && !IsNail && !IsNailInPos)
         {
             if(Object != null)
             {
                 Object.Drop();
                 Object.IsGrabbed = false;
-                Object.IsClipOnNail = false;     
+                Object.IsClipOnNail = false;
             }
             Object = null;
         }
 
         SelectNail();
-        if (IsNail)
+        NailExp();
+        
+        if (IsNail && IsNailInPos)
         {
             Object = null;
         }
 
-        if (Object != null && !IsNail)
+        if (Object != null && !IsNail && !IsNailInPos)
         {
             Object.transform.rotation = armTarget.rotation;
         }
 
-        if(!IsNail)
+        if(!IsNail && !IsNailInPos)
         {
             targetXRot = Input.GetMouseButton(1) ? 85f : 0f;
             xRot = Mathf.Lerp(xRot, targetXRot, Time.deltaTime * rotationSpeed);
@@ -80,14 +87,12 @@ public class GrabSystem : MonoBehaviour
     public void SelectNail()
     {
         if(Object != null && Object.IsGrabbed)
-
         {
-            if (Object.IsGrabbed && Object.CompareTag("BlackClip"))
+            if (Object.CompareTag("BlackClip"))
             {
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _, 2f, OutLineLayer))
                 {
                     LongNail.enabled = true;
-                    Clip = Object.transform;
                     if(Input.GetKeyDown(KeyCode.Mouse1))
                     {
                         IsNail = true;
@@ -104,14 +109,13 @@ public class GrabSystem : MonoBehaviour
                 }
             }
 
-            else if (Object.IsGrabbed && Object.CompareTag("RedClip"))
+            else if (Object.CompareTag("RedClip"))
             {
 
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _, 2f, OutLineLayer))
                 {
                     ShortNail.enabled = true;
 
-                    Clip = Object.transform;
                     if(Input.GetKeyDown(KeyCode.Mouse1))
                     {       
                         IsNail = true;
@@ -135,5 +139,43 @@ public class GrabSystem : MonoBehaviour
             ShortNail.enabled = false;
             IsNail = false;
         }
+    }
+    void NailExp()
+    {
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit place, 2f, OutLineLayer))
+        {
+            NailPlace = place.transform.GetComponent<Outline>();
+
+
+            if(Object != null && Object.IsGrabbed)
+            {
+                if (Object.CompareTag("Nail"))
+                {
+                    NailPlace.enabled = true;
+                    if(Input.GetKeyDown(KeyCode.Mouse1))
+                    {
+                        Object.IsNailOn = true;
+                        IsNailInPos = true;
+                        Object.transform.SetParent(place.transform);
+                    }
+                    else
+                    {
+                        IsNailInPos = false;
+                    }
+
+                }
+
+            }
+            else
+            {
+                IsNailInPos = false;
+            }
+        
+        }
+        else if (NailPlace != null)
+        {
+            NailPlace.enabled = false;
+        }
+            
     }
 }

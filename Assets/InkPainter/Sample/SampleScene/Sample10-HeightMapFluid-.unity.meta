@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 02d85c2233f837148a42c3a4ae0fbdff
+timeCreated: 1477114636
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Sample/SampleScene/Sample10-HeightMapFluid-.unity
+  uploadId: 224922

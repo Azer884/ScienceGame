@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 843b6c76b8aa7af46970489e76273f01
+timeCreated: 1476621248
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Sample/Shader/TessellateHeightTransform.shader
+  uploadId: 224922

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 31b442f7871f22b4090707dd94d91bb7
+timeCreated: 1511840229
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Shader/Effective/InvertAlpha.shader
+  uploadId: 224922

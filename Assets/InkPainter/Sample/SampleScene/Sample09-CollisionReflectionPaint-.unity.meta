@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d9afe193cb111344abf269db5a36b23f
+timeCreated: 1478696225
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Sample/SampleScene/Sample09-CollisionReflectionPaint-.unity
+  uploadId: 224922

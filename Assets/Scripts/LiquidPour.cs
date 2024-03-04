@@ -53,6 +53,15 @@ public class LiquidPour : MonoBehaviour
                 lv.UpdateLayers(true);
             }
         }
+        else if(other.layer == LayerMask.NameToLayer("Copper"))
+        {
+            if (lv.liquidLayers[1].amount < .25f)
+            {
+                lv.liquidLayers[1].amount += fillSpeed * .2f;
+
+                lv.UpdateLayers(true);
+            }
+        }
     }
         
 

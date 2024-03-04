@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ffe5130c5d8f8914990f9cea8bfdc209
+timeCreated: 1477487605
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Sample/SampleScene/Sample06-Morphing-.unity
+  uploadId: 224922

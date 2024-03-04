@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: dc93cbcbac82502408703db18a792e7e
+timeCreated: 1476613867
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Sample/Shader/VTFHeightTransform.shader
+  uploadId: 224922

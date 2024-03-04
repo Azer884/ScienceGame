@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5870c1700d125d2489931d3e51784b87
+timeCreated: 1478924734
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Resources/Es.InkPainter.Fluid.HeightToNormal.mat
+  uploadId: 224922

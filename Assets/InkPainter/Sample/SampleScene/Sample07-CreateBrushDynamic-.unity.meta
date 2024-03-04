@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ada8bd118c5f10349b91651d706aa1e8
+timeCreated: 1477721832
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Sample/SampleScene/Sample07-CreateBrushDynamic-.unity
+  uploadId: 224922

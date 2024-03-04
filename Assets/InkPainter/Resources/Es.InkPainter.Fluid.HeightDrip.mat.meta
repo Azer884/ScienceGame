@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9bf1f529c24d583488e446c06e0dd304
+timeCreated: 1478924734
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Resources/Es.InkPainter.Fluid.HeightDrip.mat
+  uploadId: 224922

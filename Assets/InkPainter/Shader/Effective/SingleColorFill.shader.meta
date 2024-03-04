@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 61fecf77fcb10184e84be25b0cdc5b5e
+timeCreated: 1481035913
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Shader/Effective/SingleColorFill.shader
+  uploadId: 224922

@@ -17,17 +17,14 @@ public class FireCheck : MonoBehaviour
 
         lv = transform.parent.GetComponent<LiquidVolume> ();
 
-        countdownCoroutine = null; // Initialize the countdownCoroutine variable to null
+        countdownCoroutine = null;
     }
 
     private void OnParticleCollision(GameObject other)
     {
         if(lv.liquidLayers[2].amount > .1f)
         {
-            if (countdownCoroutine == null)
-            {
-                countdownCoroutine = StartCoroutine(Countdown());
-            }
+            countdownCoroutine ??= StartCoroutine(Countdown());
         }
         else
         {

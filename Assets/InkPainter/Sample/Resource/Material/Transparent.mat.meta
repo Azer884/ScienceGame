@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a6424fcd754059442b880892712cecf9
+timeCreated: 1476365923
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Sample/Resource/Material/Transparent.mat
+  uploadId: 224922

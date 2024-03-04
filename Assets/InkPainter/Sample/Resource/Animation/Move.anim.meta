@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5a1eeaa01645c6d42ba5efb2dbd92101
+timeCreated: 1478699153
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Sample/Resource/Animation/Move.anim
+  uploadId: 224922

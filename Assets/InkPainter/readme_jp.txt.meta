@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b961ccce50dd96246afb18430e2d0e67
+timeCreated: 1479545611
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/readme_jp.txt
+  uploadId: 224922

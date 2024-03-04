@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 101abcc522ea6a94e80ab70e765565bf
+timeCreated: 1478013306
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 86210
+  packageName: Ink Painter
+  packageVersion: nv1.2.1
+  assetPath: Assets/InkPainter/Sample/SampleScene/Sample08-ReflectionPaint-.unity
+  uploadId: 224922
