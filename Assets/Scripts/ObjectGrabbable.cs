@@ -14,13 +14,16 @@ public class ObjectGrabbable : MonoBehaviour
     private Transform OriginalParent;
     [HideInInspector] public bool IsGrabbed = false; 
     [HideInInspector] public bool IsClipOnNail = false;
-    [HideInInspector] public bool IsNailOn = false;
+    [HideInInspector] public bool IsOnPos = false;
+    [HideInInspector] public Transform TargetPosForNail;
+
     private void Awake() 
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         Cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
         OriginalParent = transform.parent;
+        TargetPosForNail = transform;
     }
 
     public void Grab(Transform GrabPoint)
@@ -72,15 +75,12 @@ public class ObjectGrabbable : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetClip.rotation, Time.deltaTime * 60f);
             }
         }
-        if (IsNailOn)
-        {   
-            IsGrabbed = false;
-        
-            rb.useGravity = false;
-            rb.velocity = Vector3.zero;
-            rb.constraints = RigidbodyConstraints.FreezeAll;
-
-            transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(0f, 0f, 0f));
+        if (IsOnPos) 
+        {
+            transform.position = TargetPosForNail.position + Vector3.up * .2f;
+            rb.constraints = RigidbodyConstraints.FreezePosition;
+            rb.constraints = RigidbodyConstraints.FreezeRotationY;
+            
         }
     }
 }

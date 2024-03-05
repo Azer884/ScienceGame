@@ -19,13 +19,11 @@ public class GrabSystem : MonoBehaviour
 
     public Outline LongNail;
     public Outline ShortNail;
-    private Outline NailPlace;
     public Transform[] TargetRedClips;
     public Transform[] TargetBlackClips;
     [HideInInspector]public bool IsNail = false;
-    public bool IsNailInPos = false;
 
-    private LiquidVolume lv;
+    public Outline TubeOutLine;
 
 
 
@@ -39,10 +37,11 @@ public class GrabSystem : MonoBehaviour
                 float pickUpDistance = 2f;
                 if (Physics.Raycast(PlayerCam.position, PlayerCam.forward, out RaycastHit raycastHit, pickUpDistance, PickupLayer))
                 {
-                    if (raycastHit.transform.TryGetComponent(out Object) && !IsNail && !IsNailInPos)
+                    if (raycastHit.transform.TryGetComponent(out Object) && !IsNail)
                     {
                         Object.Grab(transform);
                         Object.IsGrabbed = true;
+                        Object.IsOnPos = false;
                         Object.IsClipOnNail = false;
 
                     }
@@ -50,7 +49,7 @@ public class GrabSystem : MonoBehaviour
             }
         }
             
-        else if (Input.GetMouseButtonUp(0) && !IsNail && !IsNailInPos)
+        else if (Input.GetMouseButtonUp(0) && !IsNail)
         {
             if(Object != null)
             {
@@ -62,24 +61,51 @@ public class GrabSystem : MonoBehaviour
         }
 
         SelectNail();
-        NailExp();
         
-        if (IsNail && IsNailInPos)
+        if (IsNail)
         {
             Object = null;
         }
 
-        if (Object != null && !IsNail && !IsNailInPos)
+        if (Object != null && !IsNail)
         {
             Object.transform.rotation = armTarget.rotation;
         }
 
-        if(!IsNail && !IsNailInPos)
+        if(Object == null || (Object.gameObject.layer == LayerMask.NameToLayer("Default") && !IsNail))
         {
             targetXRot = Input.GetMouseButton(1) ? 85f : 0f;
             xRot = Mathf.Lerp(xRot, targetXRot, Time.deltaTime * rotationSpeed);
 
             armTarget.localRotation = Quaternion.Euler(0f, 0f, xRot);
+        }
+
+        else if(Object.gameObject.layer == LayerMask.NameToLayer("Nail"))
+        {
+            float pickUpDistance = 2f;
+            if (Physics.Raycast(PlayerCam.position, PlayerCam.forward, out RaycastHit raycastHit, pickUpDistance, LayerMask.NameToLayer("NailLayer")))
+            {
+                if (raycastHit.transform.TryGetComponent(out TubeOutLine))
+                {
+                    TubeOutLine.enabled = true;
+                    if (Input.GetKeyDown(KeyCode.Mouse1))
+                    {
+                        Object.TargetPosForNail = raycastHit.transform.GetChild(0).GetChild(0);
+                        Object.transform.SetParent(raycastHit.transform.GetChild(0).GetChild(0));
+                        Object.IsGrabbed = false;
+                        Object.GrabPoint = null;
+                        Object.IsOnPos = true;
+                    }
+                }
+            }
+            else if (TubeOutLine != null)
+            {
+                TubeOutLine.enabled = false;
+            }
+        }
+        if(TubeOutLine != null)
+        {
+            TubeOutLine.enabled = false;
         }
     }
 
@@ -139,43 +165,5 @@ public class GrabSystem : MonoBehaviour
             ShortNail.enabled = false;
             IsNail = false;
         }
-    }
-    void NailExp()
-    {
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit place, 2f, OutLineLayer))
-        {
-            NailPlace = place.transform.GetComponent<Outline>();
-
-
-            if(Object != null && Object.IsGrabbed)
-            {
-                if (Object.CompareTag("Nail"))
-                {
-                    NailPlace.enabled = true;
-                    if(Input.GetKeyDown(KeyCode.Mouse1))
-                    {
-                        Object.IsNailOn = true;
-                        IsNailInPos = true;
-                        Object.transform.SetParent(place.transform);
-                    }
-                    else
-                    {
-                        IsNailInPos = false;
-                    }
-
-                }
-
-            }
-            else
-            {
-                IsNailInPos = false;
-            }
-        
-        }
-        else if (NailPlace != null)
-        {
-            NailPlace.enabled = false;
-        }
-            
     }
 }
