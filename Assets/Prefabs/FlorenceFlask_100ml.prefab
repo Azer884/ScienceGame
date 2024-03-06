@@ -5042,8 +5042,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1816465938259971018}
-  - {fileID: 6639008515569591322}
   - {fileID: 2149924172027194614}
+  - {fileID: 6639008515569591322}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1457719012525371709
@@ -5085,6 +5085,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 069da6216f32ebe46b07120fdccfaf0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GrabPoint: {fileID: 0}
+  IsGrabbed: 0
+  IsClipOnNail: 0
+  IsOnPos: 0
+  TargetPosForNail: {fileID: 0}
+  ContainerHeight: 0
 --- !u!1 &3799197749436879906
 GameObject:
   m_ObjectHideFlags: 0
@@ -5375,6 +5381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a5adec64431e4439ffc1ad01f423cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  liquid: {fileID: 0}
 --- !u!114 &7673094247955155283
 MonoBehaviour:
   m_ObjectHideFlags: 0

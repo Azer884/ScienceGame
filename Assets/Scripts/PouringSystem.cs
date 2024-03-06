@@ -5,7 +5,7 @@ using LiquidVolumeFX;
 
 public class PouringSystem : MonoBehaviour
 {
-    private LiquidVolume liquid;
+    [HideInInspector]public LiquidVolume liquid;
     private new ParticleSystem particleSystem;
 
 

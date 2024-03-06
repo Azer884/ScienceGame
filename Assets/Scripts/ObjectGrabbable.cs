@@ -16,6 +16,7 @@ public class ObjectGrabbable : MonoBehaviour
     [HideInInspector] public bool IsClipOnNail = false;
     [HideInInspector] public bool IsOnPos = false;
     [HideInInspector] public Transform TargetPosForNail;
+    [HideInInspector]public float ContainerHeight;
 
     private void Awake() 
     {
@@ -28,26 +29,23 @@ public class ObjectGrabbable : MonoBehaviour
 
     public void Grab(Transform GrabPoint)
     {
+        IsGrabbed = true;
         this.GrabPoint = GrabPoint;
         rb.useGravity = false;
         rb.velocity = Vector3.zero;
         rb.constraints = RigidbodyConstraints.None;
-        if(OriginalParent)
-        {
-            transform.SetPositionAndRotation(OriginalParent.position, OriginalParent.rotation);
-        }
-        //transform.parent = GrabPoint;
+        IsOnPos = false;
+        
+        //transform.parent = OriginalParent;
     }
     public void Drop()
     {
+        IsGrabbed = false;
         GrabPoint = null;
         rb.useGravity = true;
         rb.velocity = Vector3.zero;
         rb.constraints = RigidbodyConstraints.None;
-        if(OriginalParent)
-        {
-            transform.SetPositionAndRotation(OriginalParent.position, OriginalParent.rotation);
-        }
+        
         //transform.parent = OriginalParent;
     }
     private void Update() 
@@ -75,12 +73,11 @@ public class ObjectGrabbable : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetClip.rotation, Time.deltaTime * 60f);
             }
         }
+
         if (IsOnPos) 
         {
-            transform.position = TargetPosForNail.position + Vector3.up * .2f;
+            transform.localPosition = Vector3.up * ContainerHeight;
             rb.constraints = RigidbodyConstraints.FreezePosition;
-            rb.constraints = RigidbodyConstraints.FreezeRotationY;
-            
         }
     }
 }

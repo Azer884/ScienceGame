@@ -47,9 +47,10 @@ public class FireCheck : MonoBehaviour
             targetTime--;
         }
 
-        lv.liquidLayers[2].amount /= lv.liquidLayers[2].density; 
+        lv.liquidLayers[2].amount = 0f;
+        /*lv.liquidLayers[2].amount /= lv.liquidLayers[2].density; 
         lv.liquidLayers[2].density = 1f ;
-        lv.liquidLayers[2].miscible = true ;
+        lv.liquidLayers[2].miscible = true ;*/
 
         particleSystem.gameObject.SetActive(true);
         lv.UpdateLayers(true);

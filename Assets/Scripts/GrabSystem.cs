@@ -22,8 +22,14 @@ public class GrabSystem : MonoBehaviour
     public Transform[] TargetRedClips;
     public Transform[] TargetBlackClips;
     [HideInInspector]public bool IsNail = false;
+    [HideInInspector]public Outline TubeOutLine;
 
-    public Outline TubeOutLine;
+    private float targetTime;
+    private Coroutine countdownCoroutine;
+    private Transform Flask;
+    private float targetPoint;
+    private bool CountdownCheck = false;
+    public Color color;
 
 
 
@@ -40,8 +46,6 @@ public class GrabSystem : MonoBehaviour
                     if (raycastHit.transform.TryGetComponent(out Object) && !IsNail)
                     {
                         Object.Grab(transform);
-                        Object.IsGrabbed = true;
-                        Object.IsOnPos = false;
                         Object.IsClipOnNail = false;
 
                     }
@@ -82,6 +86,10 @@ public class GrabSystem : MonoBehaviour
 
         else if(Object.gameObject.layer == LayerMask.NameToLayer("Nail"))
         {
+            CountdownCheck = false;
+            targetPoint = 0f;
+            targetTime = 10f;
+
             float pickUpDistance = 2f;
             if (Physics.Raycast(PlayerCam.position, PlayerCam.forward, out RaycastHit raycastHit, pickUpDistance, LayerMask.NameToLayer("NailLayer")))
             {
@@ -90,11 +98,51 @@ public class GrabSystem : MonoBehaviour
                     TubeOutLine.enabled = true;
                     if (Input.GetKeyDown(KeyCode.Mouse1))
                     {
+                        Flask = raycastHit.transform;
+                        
+                        switch (raycastHit.transform.name)
+                        {
+                            case "TestTube":
+                                Object.ContainerHeight = 0.013f;
+                            break;
+
+                            case "Beaker_100ml":
+                                Object.ContainerHeight = 0.005f;
+                            break;
+
+                            case "Erlenmeyer_100ml":
+                                Object.ContainerHeight = 0.04f;
+                            break;
+
+                            case "FlorenceFlask_100ml":
+                                Object.ContainerHeight = 0.02f;
+                            break;
+
+                            case "Electrolysis":
+                                Object.ContainerHeight = 0.07f;
+                            break;
+                        }
+
                         Object.TargetPosForNail = raycastHit.transform.GetChild(0).GetChild(0);
                         Object.transform.SetParent(raycastHit.transform.GetChild(0).GetChild(0));
                         Object.IsGrabbed = false;
                         Object.GrabPoint = null;
                         Object.IsOnPos = true;
+
+                        if (Flask.GetComponentInChildren<PouringSystem>().liquid.liquidLayers[1].amount >= .1f)
+                        {
+                            countdownCoroutine ??= StartCoroutine(Countdown());
+                        }
+                        else
+                        {
+                            if(countdownCoroutine != null)
+                            {
+                                StopCoroutine(countdownCoroutine);
+                                countdownCoroutine = null;
+                                targetTime = 10f;
+                            }
+                        }
+
                     }
                 }
             }
@@ -106,6 +154,18 @@ public class GrabSystem : MonoBehaviour
         if(TubeOutLine != null)
         {
             TubeOutLine.enabled = false;
+        }
+
+        if (CountdownCheck)
+        {
+            Flask.GetComponentInChildren<LiquidVolume>().liquidLayers[1].color = Color.Lerp(Flask.GetComponentInChildren<LiquidVolume>().liquidLayers[1].color ,color, targetPoint);
+            Flask.GetComponentInChildren<LiquidVolume>().UpdateLayers(true);
+            targetPoint += Time.deltaTime * .0001f;
+            if (Flask.GetComponentInChildren<LiquidVolume>().liquidLayers[1].color == color)
+            {
+                CountdownCheck = false;
+                targetPoint = 0f;
+            }
         }
     }
 
@@ -165,5 +225,21 @@ public class GrabSystem : MonoBehaviour
             ShortNail.enabled = false;
             IsNail = false;
         }
+    }
+
+    private IEnumerator Countdown()
+    {
+        targetTime = 10f;
+        while (targetTime > 0)
+        {
+            yield return new WaitForSeconds(1);
+            targetTime--;
+        }
+        CountdownCheck = true;
+
+        
+        
+
+        countdownCoroutine = null;
     }
 }
