@@ -106,15 +106,15 @@ public class GrabSystem : MonoBehaviour
                                 Object.ContainerHeight = 0.013f;
                             break;
 
-                            case "Beaker_100ml":
+                            case "Beaker":
                                 Object.ContainerHeight = 0.005f;
                             break;
 
-                            case "Erlenmeyer_100ml":
+                            case "Erlenmeyer":
                                 Object.ContainerHeight = 0.04f;
                             break;
 
-                            case "FlorenceFlask_100ml":
+                            case "FlorenceFlask":
                                 Object.ContainerHeight = 0.02f;
                             break;
 
@@ -146,12 +146,13 @@ public class GrabSystem : MonoBehaviour
                     }
                 }
             }
-            else if (TubeOutLine != null)
-            {
-                TubeOutLine.enabled = false;
-            }
         }
-        if(TubeOutLine != null)
+
+        if (Object != null && ((Object.gameObject.layer != LayerMask.NameToLayer("Nail")) || !Physics.Raycast(PlayerCam.position, PlayerCam.forward, out _, 2f, LayerMask.NameToLayer("NailLayer"))) && TubeOutLine != null)
+        {
+            TubeOutLine.enabled = false;
+        }
+        else if (Object == null && TubeOutLine != null)
         {
             TubeOutLine.enabled = false;
         }
@@ -167,6 +168,9 @@ public class GrabSystem : MonoBehaviour
                 targetPoint = 0f;
             }
         }
+
+
+        
     }
 
 
