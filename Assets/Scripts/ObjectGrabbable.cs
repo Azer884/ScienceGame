@@ -17,6 +17,7 @@ public class ObjectGrabbable : MonoBehaviour
     [HideInInspector] public bool IsOnPos = false;
     [HideInInspector] public Transform TargetPosForNail;
     [HideInInspector]public float ContainerHeight;
+    [HideInInspector]public bool IsConnected = false;
 
     private void Awake() 
     {
@@ -78,6 +79,18 @@ public class ObjectGrabbable : MonoBehaviour
         {
             transform.localPosition = Vector3.up * ContainerHeight;
             rb.constraints = RigidbodyConstraints.FreezePosition;
+        }
+
+        if (IsConnected)
+        {
+            Transform ConnectorTransform = GrabPoint.GetComponent<GrabSystem>().ConnectorPos;
+            rb.useGravity = false;
+            rb.velocity = Vector3.zero;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+
+            transform.position = ConnectorTransform.position;
+            transform.rotation = ConnectorTransform.rotation;
+            
         }
     }
 }

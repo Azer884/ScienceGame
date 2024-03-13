@@ -51,12 +51,12 @@ public class UiManager : MonoBehaviour
 
                         if (lv.liquidLayers[1].amount > 0.01f && ColorCheck(lv.liquidLayers[1].color, color))
                         {
-                            Objectname.text += " (Cu²⁺ , SO₄²⁻)";
+                            Objectname.text += " (Cu<sup>2+</sup> , SO<sub>4</sub><sup>2-</sup>)";
                         }
 
                         if (lv.liquidLayers[2].amount > 0.01f && ColorCheck(lv.liquidLayers[2].color, color1))
                         {
-                            Objectname.text += " (Fe²⁺)";
+                            Objectname.text += " (Fe<sup>2+</sup>)";
                         }
                     }
                 }

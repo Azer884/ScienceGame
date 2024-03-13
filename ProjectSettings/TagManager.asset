@@ -9,6 +9,7 @@ TagManager:
   - BlackClip
   - ClipPos
   - Nail
+  - MaleConnector
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - FireLevel
   - NailLayer
   - Nail
-  - 
+  - Connector
   - 
   - 
   - 

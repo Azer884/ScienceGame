@@ -30,6 +30,9 @@ public class GrabSystem : MonoBehaviour
     private float targetPoint;
     private bool CountdownCheck = false;
     public Color color;
+    private Outline Connectoroutline;
+    public Transform ConnectorPos;
+    private Connector[] connector;
 
 
 
@@ -47,6 +50,7 @@ public class GrabSystem : MonoBehaviour
                     {
                         Object.Grab(transform);
                         Object.IsClipOnNail = false;
+                        Object.IsConnected = false;
 
                     }
                 }
@@ -64,7 +68,7 @@ public class GrabSystem : MonoBehaviour
             Object = null;
         }
 
-        SelectNail();
+        SetClipOnPosition();
         
         if (IsNail)
         {
@@ -174,7 +178,7 @@ public class GrabSystem : MonoBehaviour
     }
 
 
-    public void SelectNail()
+    public void SetClipOnPosition()
     {
         if(Object != null && Object.IsGrabbed)
         {
@@ -221,6 +225,45 @@ public class GrabSystem : MonoBehaviour
                     ShortNail.enabled = false;
                 }
             }
+
+            else if (Object.CompareTag("MaleConnector"))
+            {
+
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit raycastHit, 2f, LayerMask.NameToLayer("Connector")))
+                {
+
+                    if(Input.GetKeyDown(KeyCode.Mouse1))
+                    {
+                        
+                        if (raycastHit.transform.TryGetComponent(out connector[0]))
+                        {
+                            
+                            connector[0].ConnectedWire = Object.transform;
+                            
+                            if(!connector[0].Connected){
+                                if(raycastHit.transform.TryGetComponent(out Outline Connectoroutline))
+                                {
+                                    ConnectorPos = connector[0].transform.GetChild(1);
+                                    Connectoroutline.enabled = true;
+                                }
+                                Object.IsGrabbed = false;
+                                Object.IsConnected = true;
+                                IsNail = true;
+                                Connectoroutline.enabled = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        IsNail = false;
+                    }
+                }
+                else if(Connectoroutline != null)
+                {
+                    Connectoroutline.enabled = false;
+                    
+                }
+            }
         }
 
         else
@@ -228,7 +271,21 @@ public class GrabSystem : MonoBehaviour
             LongNail.enabled = false;
             ShortNail.enabled = false;
             IsNail = false;
+            if (Connectoroutline != null)
+            {
+                Connectoroutline.enabled = false;
+            }
+            
+            if(Object != null)
+            {
+                Object.IsConnected = false;
+            }
         }
+        /*if (Object != null && !Object.IsConnected)
+        {
+            connector.ConnectedWire = null;
+            connector = null;
+        }*/
     }
 
     private IEnumerator Countdown()
@@ -240,10 +297,6 @@ public class GrabSystem : MonoBehaviour
             targetTime--;
         }
         CountdownCheck = true;
-
-        
-        
-
         countdownCoroutine = null;
     }
 }
