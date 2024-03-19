@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0f21e9165e477224ea5df8eda2cba499
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _MainTex: {fileID: 2800000, guid: 004ce59c5228002438cd97218854d068, type: 3}
+  - _MaskTex: {fileID: 2800000, guid: eb034d3df425aab41ba01db7d0edc69c, type: 3}
+  - _MainTexMetallic: {instanceID: 0}
+  - _MainTexNormal: {instanceID: 0}
+  - _MaskTexMetallic: {fileID: 2800000, guid: 18f088b682c21bb4b92beb9bf06d501c, type: 3}
+  - _MaskTexNormal: {fileID: 2800000, guid: dda0bdf398960964693006a047ecf987, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

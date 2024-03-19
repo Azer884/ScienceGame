@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5824315698970931775}
+  - {fileID: 1848237475670784264}
   - {fileID: 4867263376208326290}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,7 +80,8 @@ MonoBehaviour:
   IsOnPos: 0
   TargetPosForNail: {fileID: 0}
   ContainerHeight: 0
---- !u!1 &5082403430755011074
+  IsConnected: 0
+--- !u!1 &6292926634270200249
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,10 +89,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5824315698970931775}
-  - component: {fileID: 936483186472461560}
-  - component: {fileID: 7131160631414021092}
-  - component: {fileID: 4311836658941734398}
+  - component: {fileID: 1848237475670784264}
+  - component: {fileID: 7346658917451931266}
+  - component: {fileID: 6895554104862993579}
+  - component: {fileID: 6122471344102092461}
   m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
@@ -99,36 +100,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5824315698970931775
+--- !u!4 &1848237475670784264
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5082403430755011074}
+  m_GameObject: {fileID: 6292926634270200249}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0.5000001, y: -0.4999999, z: -0.5000001, w: -0.4999999}
   m_LocalPosition: {x: -0.0396, y: -0.033051193, z: 0.0429}
   m_LocalScale: {x: 7.204244, y: 7.204244, z: 5.3308363}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4299305902567012509}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
---- !u!33 &936483186472461560
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &7346658917451931266
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5082403430755011074}
-  m_Mesh: {fileID: -386731530326178724, guid: dd827f95a243c454f8ecfbca3c66f4bc, type: 3}
---- !u!23 &7131160631414021092
+  m_GameObject: {fileID: 6292926634270200249}
+  m_Mesh: {fileID: -5685363115531012651, guid: 76083199d895a0f4896e74c2f6c47b4f, type: 3}
+--- !u!23 &6895554104862993579
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5082403430755011074}
+  m_GameObject: {fileID: 6292926634270200249}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -142,7 +143,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7ee7916da48d30b48b55f9c1dcae64ed, type: 2}
+  - {fileID: 2100000, guid: 1f64e9815f872eb4d969a018792d7d43, type: 2}
+  - {fileID: 2100000, guid: 1f64e9815f872eb4d969a018792d7d43, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -164,13 +166,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4311836658941734398
+--- !u!64 &6122471344102092461
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5082403430755011074}
+  m_GameObject: {fileID: 6292926634270200249}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -302,6 +304,42 @@ MonoBehaviour:
   _level: 1
   _levelMultiplier: 1
   _liquidLayers:
+  - layerName: Layer 0
+    amount: 0
+    density: 1
+    color: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 0.70980394}
+    miscible: 0
+    murkiness: 0
+    murkColor: {r: 0, g: 0, b: 0, a: 1}
+    scale: 0.001
+    viscosity: 1
+    adjustmentSpeed: 1
+    bubblesOpacity: 0
+    baseLevel: 0
+    currentBaseLevel: 0
+    currentAmount: 0
+    currentColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 0.70980394}
+    currentMurkiness: 0
+    currentColor2: {r: 0, g: 0, b: 0, a: 1}
+    currentBubblesOpacity: 0
+  - layerName: Layer 0
+    amount: 0
+    density: 1
+    color: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 0.70980394}
+    miscible: 0
+    murkiness: 0
+    murkColor: {r: 0, g: 0, b: 0, a: 1}
+    scale: 0.001
+    viscosity: 1
+    adjustmentSpeed: 1
+    bubblesOpacity: 0
+    baseLevel: 0
+    currentBaseLevel: 0
+    currentAmount: 0
+    currentColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 0.70980394}
+    currentMurkiness: 0
+    currentColor2: {r: 0, g: 0, b: 0, a: 1}
+    currentBubblesOpacity: 0
   - layerName: Layer 0
     amount: 1
     density: 1

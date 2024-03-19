@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,7 +10,7 @@ public class UiManager : MonoBehaviour
     public LayerMask layerMask;
     public TextMeshProUGUI Objectname;
     private LiquidVolume lv;
-    public Color color;
+    public Color[] color;
     public Color color1;
     // Start is called before the first frame update
     void Start()
@@ -49,14 +49,26 @@ public class UiManager : MonoBehaviour
                             Objectname.text += " (H2O)";
                         }
 
-                        if (lv.liquidLayers[1].amount > 0.01f && ColorCheck(lv.liquidLayers[1].color, color))
+                        if (lv.liquidLayers[1].amount > 0.01f && ColorCheck(lv.liquidLayers[1].color, color[0]))
                         {
                             Objectname.text += " (Cu<sup>2+</sup> , SO<sub>4</sub><sup>2-</sup>)";
+                        }
+                        else if (lv.liquidLayers[1].amount > 0.01f && ColorCheck(lv.liquidLayers[1].color, color[1]))
+                        {
+                            Objectname.text += " (Fe<sup>2+</sup>)";
+                        }
+                        else if (lv.liquidLayers[1].amount > 0.01f && ColorCheck(lv.liquidLayers[1].color, color[2]))
+                        {
+                            Objectname.text += " (H<sub>3</sub>O<sup>+</sup> , Cl<sup>-</sup>)";
                         }
 
                         if (lv.liquidLayers[2].amount > 0.01f && ColorCheck(lv.liquidLayers[2].color, color1))
                         {
-                            Objectname.text += " (Fe<sup>2+</sup>)";
+                            Objectname.text += " (Fe)";
+                            if (raycastHit.transform.name == "MetalContainer")
+                            {
+                                Objectname.text += " " + (int)(lv.liquidLayers[2].amount * 100) + "%";
+                            }
                         }
                     }
                 }
@@ -101,7 +113,7 @@ public class UiManager : MonoBehaviour
         return result.ToString();
     }
 
-    bool ColorCheck(Color lv, Color SecondColor)
+    public static bool ColorCheck(Color lv, Color SecondColor)
     {
         int r = (int)(lv.r * 1000);
         int g = (int)(lv.g * 1000);

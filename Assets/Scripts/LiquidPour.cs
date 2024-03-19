@@ -79,12 +79,8 @@ public class LiquidPour : MonoBehaviour
     float WaterCheckPos(LiquidVolume lv, float yMax, float yMin)
     {
         float y;
-        y = yMax * (2 * lv.level -1) ;
+        y = yMin + (yMax - yMin) * lv.level;
 
-        if(y <= yMin)
-        {
-            y = yMin;
-        }
         return y;
     }
 }

@@ -22,7 +22,7 @@ public class FireCheck : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        if(lv.liquidLayers[2].amount > .1f)
+        if(lv.liquidLayers[2].amount > .1f && lv.liquidLayers[1].amount > 0.1f && UiManager.ColorCheck(lv.liquidLayers[1].color, FindAnyObjectByType<UiManager>().color1))
         {
             countdownCoroutine ??= StartCoroutine(Countdown());
         }

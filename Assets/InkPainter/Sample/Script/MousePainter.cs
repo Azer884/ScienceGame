@@ -62,7 +62,8 @@ namespace Es.InkPainter.Sample
 			}
 		}
 
-		public void OnGUI()
+        [System.Obsolete]
+        public void OnGUI()
 		{
 			if(GUILayout.Button("Reset"))
 			{

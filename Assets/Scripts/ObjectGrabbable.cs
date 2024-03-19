@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework;
-using TMPro;
 using UnityEngine;
 
 public class ObjectGrabbable : MonoBehaviour
@@ -37,7 +33,7 @@ public class ObjectGrabbable : MonoBehaviour
         rb.constraints = RigidbodyConstraints.None;
         IsOnPos = false;
         
-        //transform.parent = OriginalParent;
+        transform.parent = OriginalParent;
     }
     public void Drop()
     {
@@ -59,11 +55,10 @@ public class ObjectGrabbable : MonoBehaviour
             }
         }
         if (IsClipOnNail)
-        {   
-            Transform[] targetBlackClips = GrabPoint.GetComponent<GrabSystem>().TargetBlackClips;
+        {
             IsGrabbed = false;
 
-            Transform targetClip = targetBlackClips[0];
+            Transform targetClip = GrabPoint.GetComponent<GameManager>().TargetClipPos;
             if (targetClip != null)
             {
                 rb.useGravity = false;
@@ -83,13 +78,14 @@ public class ObjectGrabbable : MonoBehaviour
 
         if (IsConnected)
         {
-            Transform ConnectorTransform = GrabPoint.GetComponent<GrabSystem>().ConnectorPos;
+            Transform ConnectorTransform = GrabPoint.GetComponent<GameManager>().ConnectorPos;
             rb.useGravity = false;
             rb.velocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezeAll;
 
             transform.position = ConnectorTransform.position;
             transform.rotation = ConnectorTransform.rotation;
+            IsConnected = false;
             
         }
     }
