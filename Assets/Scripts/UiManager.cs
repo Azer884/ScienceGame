@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using System.Text;
 using LiquidVolumeFX;
+using System;
 
 public class UiManager : MonoBehaviour
 {
@@ -46,7 +47,7 @@ public class UiManager : MonoBehaviour
                     else {
                         if (lv.liquidLayers[0].amount > 0.01f)
                         {
-                            Objectname.text += " (H2O)";
+                            Objectname.text += " (H<sub>2</sub>O)";
                         }
 
                         if (lv.liquidLayers[1].amount > 0.01f && ColorCheck(lv.liquidLayers[1].color, color[0]))
@@ -60,6 +61,14 @@ public class UiManager : MonoBehaviour
                         else if (lv.liquidLayers[1].amount > 0.01f && ColorCheck(lv.liquidLayers[1].color, color[2]))
                         {
                             Objectname.text += " (H<sub>3</sub>O<sup>+</sup> , Cl<sup>-</sup>)";
+                        }
+                        else if (lv.liquidLayers[1].amount > 0.01f && ColorCheck(lv.liquidLayers[1].color, color[3]))
+                        {
+                            Objectname.text += " (Ag<sup>+</sup> , NO<sub>3</sub><sup>-</sup>)";
+                        }
+                        else if (lv.liquidLayers[1].amount > 0.01f && ColorCheck(lv.liquidLayers[1].color, color[4]))
+                        {
+                            Objectname.text += " (Cu<sup>2+</sup>)";
                         }
 
                         if (lv.liquidLayers[2].amount > 0.01f && ColorCheck(lv.liquidLayers[2].color, color1))
@@ -90,7 +99,7 @@ public class UiManager : MonoBehaviour
             char c = str[i];
             if (char.IsUpper(c))
             {
-                modifiedStr += " "; // Add a space before uppercase character
+                modifiedStr += " ";
             }
             modifiedStr += c;
         }
@@ -123,7 +132,7 @@ public class UiManager : MonoBehaviour
         int g1 = (int)(SecondColor.g * 1000);
         int b1 = (int)(SecondColor.b * 1000);
 
-        bool check = (r - r1 <= 1) && (g - g1 <= 1) && (b - b1 <= 1);
+        bool check = (Math.Abs(r - r1) <= 1) && (Math.Abs(g - g1) <= 1) && (Math.Abs(b - b1) <= 1);
 
         return check;
     }

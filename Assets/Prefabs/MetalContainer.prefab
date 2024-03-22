@@ -343,7 +343,7 @@ MonoBehaviour:
   - layerName: Layer 0
     amount: 1
     density: 1
-    color: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 0.70980394}
+    color: {r: 0.12156863, g: 0.12156863, b: 0.12156863, a: 1}
     miscible: 0
     murkiness: 0
     murkColor: {r: 0, g: 0, b: 0, a: 1}
@@ -354,7 +354,7 @@ MonoBehaviour:
     baseLevel: 0
     currentBaseLevel: 0
     currentAmount: 1
-    currentColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 0.70980394}
+    currentColor: {r: 0.12156863, g: 0.12156863, b: 0.12156863, a: 1}
     currentMurkiness: 0
     currentColor2: {r: 0, g: 0, b: 0, a: 1}
     currentBubblesOpacity: 0

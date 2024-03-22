@@ -20,14 +20,7 @@ public class GameManager : MonoBehaviour
     public Transform TargetClipPos;
     [HideInInspector]public bool IsInteractable = false;
     [HideInInspector]public Outline TubeOutLine;
-
-    private float targetTime;
-    private Coroutine countdownCoroutine;
-    private Transform Flask;
-    private float targetPoint;
     [HideInInspector]public bool CountdownCheck = false;
-    public Color color;
-    public UiManager UI;
     public Transform ConnectorPos;
     private Connector connector;
     public LayerMask ConnectorLayer;
@@ -133,7 +126,7 @@ public class GameManager : MonoBehaviour
             Sinkoutline.enabled = false;
         }
         
-        else if(Object == null || (Object.gameObject.layer == LayerMask.NameToLayer("Default") && !IsInteractable))
+        if(Object == null || (Object.gameObject.layer == LayerMask.NameToLayer("Default") && !IsInteractable))
         {
             targetXRot = Input.GetMouseButton(1) ? 85f : 0f;
             xRot = Mathf.Lerp(xRot, targetXRot, Time.deltaTime * rotationSpeed);
@@ -142,71 +135,54 @@ public class GameManager : MonoBehaviour
         }
         
 
-        else if(Object.gameObject.layer == LayerMask.NameToLayer("Nail"))
-        {
-            CountdownCheck = false;
-            targetPoint = 0f;
-            targetTime = 10f;
-
-            float pickUpDistance = 2f;
-            if (Physics.Raycast(PlayerCam.position, PlayerCam.forward, out RaycastHit raycastHit, pickUpDistance, LayerMask.NameToLayer("NailLayer")))
+            else if (Physics.Raycast(PlayerCam.position, PlayerCam.forward, out RaycastHit raycastHit, 2f, LayerMask.NameToLayer("NailLayer")))
             {
-                if (raycastHit.transform.TryGetComponent(out TubeOutLine))
+                if(Object.gameObject.layer == LayerMask.NameToLayer("Nail") || Object.gameObject.layer == LayerMask.NameToLayer("BronzePlate"))
                 {
-                    TubeOutLine.enabled = true;
-                    if (Input.GetKeyDown(KeyCode.Mouse1))
+                    Object.CountdownCheck = false;
+                    Object.targetPoint = 0f;
+                    Object.targetTime = 10f;
+
+                    if (raycastHit.transform.TryGetComponent(out TubeOutLine))
                     {
-                        Flask = raycastHit.transform;
-                        
-                        switch (raycastHit.transform.name)
+                        TubeOutLine.enabled = true;
+                        if (Input.GetKeyDown(KeyCode.Mouse1))
                         {
-                            case "TestTube":
-                                Object.ContainerHeight = 0.013f;
-                            break;
-
-                            case "Beaker":
-                                Object.ContainerHeight = 0.005f;
-                            break;
-
-                            case "Erlenmeyer":
-                                Object.ContainerHeight = 0.04f;
-                            break;
-
-                            case "FlorenceFlask":
-                                Object.ContainerHeight = 0.02f;
-                            break;
-
-                            case "Electrolysis":
-                                Object.ContainerHeight = 0.07f;
-                            break;
-                        }
-
-                        Object.TargetPosForNail = raycastHit.transform.GetChild(0).GetChild(0);
-                        Object.transform.SetParent(raycastHit.transform.GetChild(0).GetChild(0));
-                        Object.IsGrabbed = false;
-                        Object.GrabPoint = null;
-                        Object.IsOnPos = true;
-
-                        if (Flask.GetComponentInChildren<PouringSystem>().liquid.liquidLayers[1].amount >= .1f && UiManager.ColorCheck(Flask.GetComponentInChildren<PouringSystem>().liquid.liquidLayers[1].color, UI.color[0]))
-                        {
-                            countdownCoroutine ??= StartCoroutine(Countdown());
-                        }
-                        else
-                        {
-                            if(countdownCoroutine != null)
+                            
+                            switch (raycastHit.transform.name)
                             {
-                                StopCoroutine(countdownCoroutine);
-                                countdownCoroutine = null;
-                                targetTime = 10f;
-                            }
-                        }
+                                case "TestTube":
+                                    Object.ContainerHeight = 0.013f;
+                                break;
 
+                                case "Beaker":
+                                    Object.ContainerHeight = 0.005f;
+                                break;
+
+                                case "Erlenmeyer":
+                                    Object.ContainerHeight = 0.04f;
+                                break;
+
+                                case "FlorenceFlask":
+                                    Object.ContainerHeight = 0.02f;
+                                break;
+
+                                case "Electrolysis":
+                                    Object.ContainerHeight = 0.07f;
+                                break;
+                            }
+
+                            Object.TargetPosForNail = raycastHit.transform.GetChild(0).GetChild(0);
+                            Object.transform.SetParent(raycastHit.transform.GetChild(0).GetChild(0));
+                            Object.IsGrabbed = false;
+                            Object.GrabPoint = null;
+                            Object.IsOnPos = true;
+                        }
                     }
                 }
             }
-        }
 
-        if (Object != null && ((Object.gameObject.layer != LayerMask.NameToLayer("Nail")) || !Physics.Raycast(PlayerCam.position, PlayerCam.forward, out _, 2f, LayerMask.NameToLayer("NailLayer"))) && TubeOutLine != null)
+        if (Object != null && (((Object.gameObject.layer != LayerMask.NameToLayer("Nail")) && Object.gameObject.layer != LayerMask.NameToLayer("BronzePlate")) || !Physics.Raycast(PlayerCam.position, PlayerCam.forward, out _, 2f, LayerMask.NameToLayer("NailLayer"))) && TubeOutLine != null)
         {
             TubeOutLine.enabled = false;
         }
@@ -214,19 +190,6 @@ public class GameManager : MonoBehaviour
         {
             TubeOutLine.enabled = false;
         }
-
-        if (CountdownCheck)
-        {
-            Flask.GetComponentInChildren<LiquidVolume>().liquidLayers[1].color = Color.Lerp(Flask.GetComponentInChildren<LiquidVolume>().liquidLayers[1].color ,color, targetPoint);
-            Flask.GetComponentInChildren<LiquidVolume>().UpdateLayers(true);
-            targetPoint += Time.deltaTime * .0001f;
-            if (Flask.GetComponentInChildren<LiquidVolume>().liquidLayers[1].color == color)
-            {
-                CountdownCheck = false;
-                targetPoint = 0f;
-            }
-        }
-        
     }
 
 
@@ -395,17 +358,6 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private IEnumerator Countdown()
-    {
-        targetTime = 10f;
-        while (targetTime > 0)
-        {
-            yield return new WaitForSeconds(1);
-            targetTime--;
-        }
-        CountdownCheck = true;
-        countdownCoroutine = null;
-    }
 
     bool CheckChildLiquidAmount(Transform parent, int i)
     {

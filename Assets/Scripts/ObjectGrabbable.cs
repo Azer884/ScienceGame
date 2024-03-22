@@ -1,3 +1,5 @@
+using System.Collections;
+using LiquidVolumeFX;
 using UnityEngine;
 
 public class ObjectGrabbable : MonoBehaviour
@@ -14,6 +16,11 @@ public class ObjectGrabbable : MonoBehaviour
     [HideInInspector] public Transform TargetPosForNail;
     [HideInInspector]public float ContainerHeight;
     [HideInInspector]public bool IsConnected = false;
+
+    public bool CountdownCheck = false;
+    public float targetPoint;
+    private Coroutine countdownCoroutine;
+    public float targetTime;
 
     private void Awake() 
     {
@@ -74,6 +81,39 @@ public class ObjectGrabbable : MonoBehaviour
         {
             transform.localPosition = Vector3.up * ContainerHeight;
             rb.constraints = RigidbodyConstraints.FreezePosition;
+
+            if(gameObject.layer == LayerMask.NameToLayer("Nail"))
+            {
+                if (transform.parent.parent.parent.GetComponentInChildren<LiquidVolume>().liquidLayers[1].amount >= .1f && UiManager.ColorCheck(transform.parent.parent.parent.GetComponentInChildren<LiquidVolume>().liquidLayers[1].color, FindAnyObjectByType<UiManager>().color[0]))
+                {
+                    countdownCoroutine ??= StartCoroutine(Countdown());
+                }
+                else
+                {
+                    if(countdownCoroutine != null)
+                    {
+                        StopCoroutine(countdownCoroutine);
+                        countdownCoroutine = null;
+                        targetTime = 10f;
+                    }
+                }
+            }
+            else if(gameObject.layer == LayerMask.NameToLayer("BronzePlate"))
+            {
+                if (transform.parent.parent.parent.GetComponentInChildren<LiquidVolume>().liquidLayers[1].amount >= .1f && UiManager.ColorCheck(transform.parent.parent.parent.GetComponentInChildren<LiquidVolume>().liquidLayers[1].color, FindAnyObjectByType<UiManager>().color[3]))
+                {
+                    countdownCoroutine ??= StartCoroutine(Countdown());
+                }
+                else
+                {
+                    if(countdownCoroutine != null)
+                    {
+                        StopCoroutine(countdownCoroutine);
+                        countdownCoroutine = null;
+                        targetTime = 10f;
+                    }
+                }
+            }
         }
 
         if (IsConnected)
@@ -88,5 +128,39 @@ public class ObjectGrabbable : MonoBehaviour
             IsConnected = false;
             
         }
+
+        if (CountdownCheck)
+        {
+            if(gameObject.layer == LayerMask.NameToLayer("Nail"))
+            {
+                ChangeColor(transform.parent.parent.parent.GetComponentInChildren<LiquidVolume>(), FindAnyObjectByType<UiManager>().color[1]);
+            }
+            else if (gameObject.layer == LayerMask.NameToLayer("BronzePlate"))
+            {
+                ChangeColor(transform.parent.parent.parent.GetComponentInChildren<LiquidVolume>(), FindAnyObjectByType<UiManager>().color[4]);
+            }
+        }
+    }
+    private IEnumerator Countdown()
+    {
+        targetTime = 10f;
+        while (targetTime > 0)
+        {
+            yield return new WaitForSeconds(1);
+            targetTime--;
+        }
+        CountdownCheck = true;
+        countdownCoroutine = null;
+    }
+    private void ChangeColor(LiquidVolume lv, Color color)
+    {
+        lv.liquidLayers[1].color = Color.Lerp(lv.liquidLayers[1].color ,color, targetPoint);
+            lv.UpdateLayers(true);
+            targetPoint += Time.deltaTime * .0001f;
+            if (lv.liquidLayers[1].color == color)
+            {
+                CountdownCheck = false;
+                targetPoint = 0f;
+            }
     }
 }
