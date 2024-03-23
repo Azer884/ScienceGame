@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using LiquidVolumeFX;
+using Unity.Burst.Intrinsics;
 
 public class Electrolysis : MonoBehaviour
 {
     private LiquidVolume lv;
     public GameObject bubbles;
-    public Outline Nail;
+    public Transform[] Clips;
+    public ElectricityCheck[] Cables;
 
     
     void Start()
@@ -26,18 +28,57 @@ public class Electrolysis : MonoBehaviour
     void BubbleSys(){
         if (lv.liquidLayers[0].amount >= 0.6f)
         {
-            /*if (electricity)
-            {*/
-                bubbles.SetActive(true);
-            //}
-            /*else
+            if (CheckTransforms(Clips, Cables))
             {
-                bubbleParticles.Stop();
-            }*/
+                if (CheckElectricity(Cables))
+                {
+                    bubbles.SetActive(true);
+                }
+                else
+                {
+                    bubbles.SetActive(false);
+                }
+            }
+            else
+            {
+                bubbles.SetActive(false);
+            }
         }
         else
         {
             bubbles.SetActive(false);
         }
+    }
+    private bool CheckTransforms(Transform[] transforms, ElectricityCheck[] transforms1)
+    {
+        bool v = true;
+        for (int i = 0; i < transforms.Length; i++)
+        {
+            if (transforms1[i].TryGetComponent(out ObjectGrabbable grabbable))
+            {
+                if (grabbable.targetClip != transforms[i])
+                {
+                    v = false;
+                    break;
+                }
+            }
+        }
+
+        return v;
+    }
+
+    private bool CheckElectricity(ElectricityCheck[] electricity)
+    {
+        bool v = true;
+        for (int i = 0; i < electricity.Length ; i++)
+        {
+            if (!electricity[i].ElectricityOn)
+            {
+                v = false;
+                break;
+            }
+        }
+
+        return v;
     }
 }

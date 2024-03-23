@@ -14,10 +14,9 @@ public class GameManager : MonoBehaviour
     private readonly float rotationSpeed = 5f;
     private float targetXRot = 0f;
 
-    public Outline LongNail;
+    public Outline LongNailOutLine;
     public Outline ShortNailOutLine;
-    public Connector[] ShortNail;
-    public Transform TargetClipPos;
+    public Transform[] TargetClipPos;
     [HideInInspector]public bool IsInteractable = false;
     [HideInInspector]public Outline TubeOutLine;
     [HideInInspector]public bool CountdownCheck = false;
@@ -52,17 +51,6 @@ public class GameManager : MonoBehaviour
                             connector.ConnectedWire = null;
                         }
                         connector = null;
-                        if (ShortNail[0] != null && (ShortNail[0].ConnectedWire == Object.transform))
-                        {
-                            ShortNail[0].ConnectedWire = null;
-                        }
-                        ShortNail[0] = null;
-                        if (ShortNail[1] != null && (ShortNail[1].ConnectedWire == Object.transform))
-                        {
-                            ShortNail[1].ConnectedWire = null;
-                        }
-                        ShortNail[1] = null;
-
                     }
                 }
             }
@@ -201,11 +189,23 @@ public class GameManager : MonoBehaviour
             {
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _, 2f, OutLineLayer))
                 {
-                    LongNail.enabled = true;
+                    LongNailOutLine.enabled = true;
                     if(Input.GetKeyDown(KeyCode.Mouse1))
                     {
                         IsInteractable = true;
                         Object.IsClipOnNail = true;
+                        if (Object.transform.parent.name == "BlackCable1")
+                        {
+                            Object.targetClip = TargetClipPos[0];
+                        }
+                        else if (Object.transform.parent.name == "BlackCable2")
+                        {
+                            Object.targetClip = TargetClipPos[1];
+                        }
+                        else
+                        {
+                            Object.targetClip = null;
+                        }
                     }
                     else
                     {
@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    LongNail.enabled = false;
+                    LongNailOutLine.enabled = false;
                 }
             }
 
@@ -223,38 +223,26 @@ public class GameManager : MonoBehaviour
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit raycastHit, 2f, OutLineLayer))
                 {
                     ShortNailOutLine.enabled = true;
-                    if(raycastHit.transform.GetChild(2).TryGetComponent(out ShortNail[0]) && raycastHit.transform.GetChild(3).TryGetComponent(out ShortNail[1]))
+                    if(Input.GetKeyDown(KeyCode.Mouse1))
                     {
-                        if (!ShortNail[0].Connected)
+                        IsInteractable = true;
+                        Object.IsClipOnNail = true;
+                        if (Object.transform.parent.name == "RedCable1")
                         {
-                            if(Input.GetKeyDown(KeyCode.Mouse1))
-                            {       
-                                IsInteractable = true;
-                                Object.IsClipOnNail = true;
-                                ShortNail[0].ConnectedWire = Object.transform;
-                                TargetClipPos = ShortNail[0].transform;
-                                ShortNailOutLine.enabled = false;
-                            }
-                            else
-                            {
-                                IsInteractable = false;
-                            }
+                            Object.targetClip = TargetClipPos[2];
                         }
-                        else if (!ShortNail[1].Connected)
+                        else if (Object.transform.parent.name == "RedCable2")
                         {
-                            if(Input.GetKeyDown(KeyCode.Mouse1))
-                            {       
-                                IsInteractable = true;
-                                Object.IsClipOnNail = true;
-                                ShortNail[1].ConnectedWire = Object.transform;
-                                TargetClipPos = ShortNail[1].transform;
-                                ShortNailOutLine.enabled = false;
-                            }
-                            else
-                            {
-                                IsInteractable = false;
-                            }
+                            Object.targetClip = TargetClipPos[3];
                         }
+                        else
+                        {
+                            Object.targetClip = null;
+                        }
+                    }
+                    else
+                    {
+                        IsInteractable = false;
                     }
                 }
                 else
@@ -343,7 +331,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            LongNail.enabled = false;
+            LongNailOutLine.enabled = false;
             ShortNailOutLine.enabled = false;
             IsInteractable = false;
             if (connector != null)

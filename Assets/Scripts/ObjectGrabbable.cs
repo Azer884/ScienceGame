@@ -12,15 +12,17 @@ public class ObjectGrabbable : MonoBehaviour
     private Transform OriginalParent;
     [HideInInspector] public bool IsGrabbed = false; 
     [HideInInspector] public bool IsClipOnNail = false;
+    [HideInInspector]public Transform targetClip;
+    [HideInInspector]public bool Electricity;
     [HideInInspector] public bool IsOnPos = false;
     [HideInInspector] public Transform TargetPosForNail;
     [HideInInspector]public float ContainerHeight;
     [HideInInspector]public bool IsConnected = false;
 
-    public bool CountdownCheck = false;
-    public float targetPoint;
+    [HideInInspector]public bool CountdownCheck = false;
+    [HideInInspector]public float targetPoint;
     private Coroutine countdownCoroutine;
-    public float targetTime;
+    [HideInInspector]public float targetTime;
 
     private void Awake() 
     {
@@ -39,6 +41,7 @@ public class ObjectGrabbable : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.constraints = RigidbodyConstraints.None;
         IsOnPos = false;
+        Electricity = false;
         
         transform.parent = OriginalParent;
     }
@@ -64,8 +67,6 @@ public class ObjectGrabbable : MonoBehaviour
         if (IsClipOnNail)
         {
             IsGrabbed = false;
-
-            Transform targetClip = GrabPoint.GetComponent<GameManager>().TargetClipPos;
             if (targetClip != null)
             {
                 rb.useGravity = false;
@@ -123,6 +124,7 @@ public class ObjectGrabbable : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezeAll;
 
+            Electricity = true;
             transform.position = ConnectorTransform.position;
             transform.rotation = ConnectorTransform.rotation;
             IsConnected = false;

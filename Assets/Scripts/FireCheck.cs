@@ -47,17 +47,9 @@ public class FireCheck : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             targetTime--;
-            Check = true;
         }
 
-        lv.liquidLayers[2].amount = 0f;
-        /*lv.liquidLayers[2].amount /= lv.liquidLayers[2].density; 
-        lv.liquidLayers[2].density = 1f ;
-        lv.liquidLayers[2].miscible = true ;*/
-
-        particleSystem.gameObject.SetActive(true);
-        lv.UpdateLayers(true);
-
+        Check = true;
         countdownCoroutine = null;
     }
     void Update() 
@@ -67,6 +59,8 @@ public class FireCheck : MonoBehaviour
             lv.liquidLayers[1].color = Color.Lerp(lv.liquidLayers[1].color ,FindAnyObjectByType<UiManager>().color[1], TargetTime);
             lv.UpdateLayers(true);
             TargetTime += Time.deltaTime * .0001f;
+            lv.liquidLayers[2].amount = 0f;
+            particleSystem.gameObject.SetActive(true);
             if (lv.liquidLayers[1].color == FindAnyObjectByType<UiManager>().color[1])
             {
                 Check = false;

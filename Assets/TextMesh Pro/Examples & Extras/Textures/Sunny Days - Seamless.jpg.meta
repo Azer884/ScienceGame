@@ -59,7 +59,7 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - serializedVersion: 2
-    buildTarget: DefaultTexturePlatform
+    buildTarget: Server
     maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1

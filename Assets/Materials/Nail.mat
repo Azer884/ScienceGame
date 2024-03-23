@@ -100,7 +100,7 @@ Material:
     - _BlendAmount: 1
     - _BlendEnd: 1
     - _BlendStart: 0
-    - _BlendThreshold: 1.0180538
+    - _BlendThreshold: 0.1130296
     - _BlendThresholdNormalized: 1
     - _BottomFadeDistance: 0.36
     - _BumpScale: 1
