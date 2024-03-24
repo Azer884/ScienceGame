@@ -6,23 +6,18 @@ public class NailExp : MonoBehaviour
 {
     public Material material;
     public Transform Level;
-    public Vector3 NailLevel;
+    private ObjectGrabbable objectGrabbable;
 
     void Start() 
     {
-        material.SetFloat("_BlendThreshold", -10);
+        objectGrabbable = transform.parent.GetComponent<ObjectGrabbable>();
     }
     void Update()
-    { 
-        NailLevel = transform.position - Level.position;
-        
-        ChangeMatBlendThreshold();
-    }
-    void ChangeMatBlendThreshold()
     {
-        if (material != null)
+        if (objectGrabbable.CountdownCheck)
         {
-            material.SetFloat("_BlendThreshold", NailLevel.y);
+            transform.position = Level.position;
         }
+        material.SetFloat("_BlendThreshold", transform.position.y);
     }
 }
