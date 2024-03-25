@@ -12,12 +12,18 @@ public class NailExp : MonoBehaviour
     {
         objectGrabbable = transform.parent.GetComponent<ObjectGrabbable>();
     }
+
     void Update()
     {
         if (objectGrabbable.CountdownCheck)
         {
             transform.position = Level.position;
         }
-        material.SetFloat("_BlendThreshold", transform.position.y);
+
+        // Calculate local Y position relative to the parent
+        float localY = transform.localPosition.y;
+
+        // Set the blend threshold based on local Y position
+        material.SetFloat("_BlendThreshold", localY);
     }
 }

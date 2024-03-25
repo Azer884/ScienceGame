@@ -157,12 +157,12 @@ public class ObjectGrabbable : MonoBehaviour
     private void ChangeColor(LiquidVolume lv, Color color)
     {
         lv.liquidLayers[1].color = Color.Lerp(lv.liquidLayers[1].color ,color, targetPoint);
-            lv.UpdateLayers(true);
-            targetPoint += Time.deltaTime * .0001f;
-            if (lv.liquidLayers[1].color == color)
-            {
-                CountdownCheck = false;
-                targetPoint = 0f;
-            }
+        lv.UpdateLayers(true);
+        targetPoint += Time.deltaTime * .0001f;
+        if (lv.liquidLayers[1].color == color)
+        {
+            CountdownCheck = false;
+            targetPoint = 0f;
+        }
     }
 }

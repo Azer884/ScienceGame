@@ -44,7 +44,7 @@ Shader "Custom/SmoothStepMaskedTextureShader"
             
             // Determine the blend factor based on Y position and mapped threshold
             float blendFactor = smoothstep(_BlendThreshold - _Smoothness, _BlendThreshold + _Smoothness, IN.worldPos.y);
-            
+
             // Blend the textures
             fixed4 blendedColor = lerp(mainTex, maskTex, blendFactor);
             
