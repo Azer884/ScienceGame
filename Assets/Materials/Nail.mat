@@ -102,7 +102,7 @@ Material:
     - _BlendFactor: 0
     - _BlendPercentage: 0
     - _BlendStart: 0
-    - _BlendThreshold: 0.12317762
+    - _BlendThreshold: -10
     - _BlendThresholdNormalized: 1
     - _BottomFadeDistance: 0.36
     - _BumpScale: 1
