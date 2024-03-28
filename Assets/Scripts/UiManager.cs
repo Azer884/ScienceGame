@@ -12,7 +12,7 @@ public class UiManager : MonoBehaviour
     public TextMeshProUGUI Objectname;
     private LiquidVolume lv;
     public Color[] color;
-    public Color color1;
+    public Color[] PowerColor;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,12 +71,20 @@ public class UiManager : MonoBehaviour
                             Objectname.text += " (Cu<sup>2+</sup>)";
                         }
 
-                        if (lv.liquidLayers[2].amount > 0.01f && ColorCheck(lv.liquidLayers[2].color, color1))
+                        if (lv.liquidLayers[2].amount > 0.01f && ColorCheck(lv.liquidLayers[2].color, PowerColor[0]))
                         {
                             Objectname.text += " (Fe)";
                             if (raycastHit.transform.name == "MetalContainer")
                             {
                                 Objectname.text += " " + (int)(lv.liquidLayers[2].amount * 100) + "%";
+                            }
+                        }
+                        if (lv.liquidLayers[3].amount > 0.01f && ColorCheck(lv.liquidLayers[3].color, PowerColor[1]))
+                        {
+                            Objectname.text += " (NaCl)";
+                            if (raycastHit.transform.name == "SaltContainer")
+                            {
+                                Objectname.text += " " + (int)(lv.liquidLayers[3].amount * 100) + "%";
                             }
                         }
                     }

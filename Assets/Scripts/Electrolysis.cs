@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using LiquidVolumeFX;
-using Unity.Burst.Intrinsics;
 
 public class Electrolysis : MonoBehaviour
 {
@@ -26,7 +23,7 @@ public class Electrolysis : MonoBehaviour
 
 
     void BubbleSys(){
-        if (lv.liquidLayers[0].amount >= 0.6f)
+        if (lv.liquidLayers[0].amount >= 0.5f && lv.liquidLayers[3].amount >= .1f)
         {
             if (CheckTransforms(Clips, Cables))
             {

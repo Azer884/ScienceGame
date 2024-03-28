@@ -41,10 +41,8 @@ public class LiquidPour : MonoBehaviour
             {
                 transform.localRotation = Quaternion.Euler (0, 0, 0);
             }
-
-            lv.UpdateLayers(true);
         }
-        else if(other.layer == LayerMask.NameToLayer("Powder"))
+        else if(other.layer == LayerMask.NameToLayer("Powder") && other.CompareTag("Metal"))
         {
             if (lv.liquidLayers[2].amount < .25f)
             {
@@ -53,11 +51,11 @@ public class LiquidPour : MonoBehaviour
                 lv.UpdateLayers(true);
             }
         }
-        else if(other.layer == LayerMask.NameToLayer("Copper"))
+        else if(other.layer == LayerMask.NameToLayer("Powder") && other.CompareTag("Salt"))
         {
-            if (lv.liquidLayers[1].amount < .25f)
+            if (lv.liquidLayers[3].amount < .15f)
             {
-                lv.liquidLayers[1].amount += fillSpeed * .2f;
+                lv.liquidLayers[3].amount += fillSpeed * .1f;
 
                 lv.UpdateLayers(true);
             }

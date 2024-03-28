@@ -406,9 +406,15 @@ MonoBehaviour:
   GrabPoint: {fileID: 0}
   IsGrabbed: 0
   IsClipOnNail: 0
+  targetClip: {fileID: 0}
+  Electricity: 0
   IsOnPos: 0
   TargetPosForNail: {fileID: 0}
   ContainerHeight: 0
+  IsConnected: 0
+  CountdownCheck: 0
+  targetPoint: 0
+  targetTime: 0
 --- !u!114 &3699520566553616385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,7 +550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _topology: 10
   _detail: 51
-  _level: 0.1601
+  _level: 0.1602
   _levelMultiplier: 1
   _liquidLayers:
   - layerName: Layer 0
@@ -560,10 +566,10 @@ MonoBehaviour:
     bubblesOpacity: 1
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0.1601
-    currentColor: {r: 0.96462256, g: 0.53359056, b: 0.9725514, a: 0.097995125}
-    currentMurkiness: 0
-    currentColor2: {r: 0.0006246096, g: 0.0006246096, b: 0.0006246096, a: 1}
+    currentAmount: 0.1602
+    currentColor: {r: 0.96453196, g: 0.5337691, b: 0.9724559, a: 0.09855817}
+    currentMurkiness: 0.00031210986
+    currentColor2: {r: 0.0006242197, g: 0.0006242197, b: 0.0006242197, a: 1}
     currentBubblesOpacity: 0
   - layerName: Layer 1
     amount: 0.16
@@ -578,10 +584,10 @@ MonoBehaviour:
     bubblesOpacity: 1
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0.1601
-    currentColor: {r: 0.96462256, g: 0.53359056, b: 0.9725514, a: 0.097995125}
-    currentMurkiness: 0
-    currentColor2: {r: 0.0006246096, g: 0.0006246096, b: 0.0006246096, a: 1}
+    currentAmount: 0.1602
+    currentColor: {r: 0.96453196, g: 0.5337691, b: 0.9724559, a: 0.09855817}
+    currentMurkiness: 0.00031210986
+    currentColor2: {r: 0.0006242197, g: 0.0006242197, b: 0.0006242197, a: 1}
     currentBubblesOpacity: 0
   - layerName: Layer 2
     amount: 0
@@ -600,6 +606,24 @@ MonoBehaviour:
     currentColor: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 1}
     currentMurkiness: 0
     currentColor2: {r: 0, g: 0, b: 0, a: 1}
+    currentBubblesOpacity: 0
+  - layerName: Layer 3
+    amount: 0
+    density: 1
+    color: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 1}
+    miscible: 1
+    murkiness: 0.5
+    murkColor: {r: 0, g: 0, b: 0, a: 1}
+    scale: 0.3
+    viscosity: 1
+    adjustmentSpeed: 1
+    bubblesOpacity: 1
+    baseLevel: 0
+    currentBaseLevel: 0
+    currentAmount: 0.1602
+    currentColor: {r: 0.96453196, g: 0.5337691, b: 0.9724559, a: 0.09855817}
+    currentMurkiness: 0.00031210986
+    currentColor2: {r: 0.0006242197, g: 0.0006242197, b: 0.0006242197, a: 1}
     currentBubblesOpacity: 0
   _smoothContactSurface: 3
   _ditherStrength: 0.5
@@ -623,15 +647,15 @@ MonoBehaviour:
   _sparklingIntensity: 0.1
   _sparklingAmount: 0.2
   _deepObscurance: 2
-  _foamColor: {r: 1, g: 1, b: 1, a: 0.65}
-  _foamScale: 0.2
+  _foamColor: {r: 1, g: 1, b: 1, a: 0.5686275}
+  _foamScale: 0.021
   _foamThickness: 0.04
   _foamDensity: -0.27
   _foamWeight: 10
   _foamTurbulence: 1
   _foamVisibleFromBottom: 1
-  _smokeEnabled: 1
-  _smokeColor: {r: 0.7, g: 0.7, b: 0.7, a: 0.25}
+  _smokeEnabled: 0
+  _smokeColor: {r: 0.7, g: 0.7, b: 0.7, a: 0}
   _smokeScale: 0.322
   _smokeBaseObscurance: 2
   _smokeHeightAtten: 4.62
@@ -666,7 +690,7 @@ MonoBehaviour:
   _textureScale: {x: 1, y: 1}
   _textureOffset: {x: 0, y: 0}
   _distortionAmount: 1
-  _depthAware: 0
+  _depthAware: 1
   _depthAwareOffset: 0
   _irregularDepthDebug: 0
   _depthAwareCustomPass: 0

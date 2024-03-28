@@ -10,14 +10,14 @@ public class ElectricityCheck : MonoBehaviour
     
     void Update()
     {
-        if (transform.GetChild(1).TryGetComponent(out ObjectGrabbable objectGrabbable))
+        if (transform.GetChild(0).TryGetComponent(out ObjectGrabbable objectGrabbable))
         {
             if (objectGrabbable.Electricity)
             {
                 start = true;
             }
         }
-        if (transform.GetChild(0).TryGetComponent(out ObjectGrabbable grabbable))
+        if (transform.GetChild(1).TryGetComponent(out ObjectGrabbable grabbable))
         {
             if (grabbable.targetClip != null)
             {

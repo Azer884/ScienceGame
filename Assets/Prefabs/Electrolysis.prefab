@@ -5041,7 +5041,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _topology: 10
   _detail: 51
-  _level: 0.0002
+  _level: 0.00029999999
   _levelMultiplier: 1
   _liquidLayers:
   - layerName: Layer 0
@@ -5057,10 +5057,10 @@ MonoBehaviour:
     bubblesOpacity: 1
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0.0002
-    currentColor: {r: 0.49511844, g: 0.5677355, b: 0.818424, a: 0.0627451}
-    currentMurkiness: 0.25
-    currentColor2: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    currentAmount: 0.00029999999
+    currentColor: {r: 0.6032816, g: 0.6516929, b: 0.8188186, a: 0.3751634}
+    currentMurkiness: 0.33333334
+    currentColor2: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
     currentBubblesOpacity: 0
   - layerName: Layer 1
     amount: 0
@@ -5075,10 +5075,10 @@ MonoBehaviour:
     bubblesOpacity: 1
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0.0002
-    currentColor: {r: 0.49511844, g: 0.5677355, b: 0.818424, a: 0.0627451}
-    currentMurkiness: 0.25
-    currentColor2: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    currentAmount: 0.00029999999
+    currentColor: {r: 0.6032816, g: 0.6516929, b: 0.8188186, a: 0.3751634}
+    currentMurkiness: 0.33333334
+    currentColor2: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
     currentBubblesOpacity: 0
   - layerName: Layer 2
     amount: 0
@@ -5097,6 +5097,24 @@ MonoBehaviour:
     currentColor: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 1}
     currentMurkiness: 0
     currentColor2: {r: 0, g: 0, b: 0, a: 1}
+    currentBubblesOpacity: 0
+  - layerName: Layer 3
+    amount: 0
+    density: 1
+    color: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 1}
+    miscible: 1
+    murkiness: 0.5
+    murkColor: {r: 0, g: 0, b: 0, a: 1}
+    scale: 0.3
+    viscosity: 1
+    adjustmentSpeed: 1
+    bubblesOpacity: 1
+    baseLevel: 0
+    currentBaseLevel: 0
+    currentAmount: 0.00029999999
+    currentColor: {r: 0.6032816, g: 0.6516929, b: 0.8188186, a: 0.3751634}
+    currentMurkiness: 0.33333334
+    currentColor2: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
     currentBubblesOpacity: 0
   _smoothContactSurface: 3
   _ditherStrength: 0.5
@@ -5479,8 +5497,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2725021876821716034}
   - component: {fileID: 756175248780151510}
-  - component: {fileID: 1561946864930323529}
-  - component: {fileID: 1988758074605920905}
   - component: {fileID: 3591771404869597815}
   - component: {fileID: 5746963508563371802}
   - component: {fileID: 2308680606437455114}
@@ -5515,36 +5531,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4267035141590580790}
   m_Mesh: {fileID: 3153863710633423289, guid: 206b358b971cb7344bc4c80662faa11e, type: 3}
---- !u!114 &1561946864930323529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4267035141590580790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbbe60fb933fad54abd8905d3c7d3e3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bubbles: {fileID: 1576005920387027302}
-  Clips: []
-  Cables: []
---- !u!114 &1988758074605920905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4267035141590580790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbbe60fb933fad54abd8905d3c7d3e3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bubbles: {fileID: 1576005920387027302}
-  Clips: []
-  Cables: []
 --- !u!114 &3591771404869597815
 MonoBehaviour:
   m_ObjectHideFlags: 0

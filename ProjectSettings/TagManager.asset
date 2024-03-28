@@ -10,6 +10,8 @@ TagManager:
   - ClipPos
   - Nail
   - MaleConnector
+  - Metal
+  - Salt
   layers:
   - Default
   - TransparentFX

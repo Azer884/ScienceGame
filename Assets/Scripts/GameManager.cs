@@ -49,14 +49,10 @@ public class GameManager : MonoBehaviour
                         Object.Grab(transform);
                         Object.IsClipOnNail = false;
                         Object.IsConnected = false;
-                        if (connector != null && (connector.ConnectedWire == Object.transform))
-                        {
-                            connector.ConnectedWire = null;
-                        }
-                        connector = null;
                     }
                 }
             }
+            connector = null;
         }
             
         else if (Input.GetMouseButtonUp(0) && !IsInteractable)
@@ -203,6 +199,10 @@ public class GameManager : MonoBehaviour
         }
 
         armTarget.localPosition = new Vector3(0f, 0f, zPos);
+        if (Object != null && connector != null && (connector.ConnectedWire == Object.transform))
+        {
+            connector.ConnectedWire = null;
+        }
     }
 
 
