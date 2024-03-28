@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
     public LayerMask SinkLayer;
     private Outline Sinkoutline;
 
+    private float targetarmPos = 2.143f;
+    private float zPos = 2.143f;
+
 
     private void Update()
     {
@@ -65,6 +68,7 @@ public class GameManager : MonoBehaviour
                 Object.IsClipOnNail = false;
             }
             Object = null;
+            targetarmPos = 2.143f;
         }
 
         SetObjOnPosition();
@@ -121,54 +125,65 @@ public class GameManager : MonoBehaviour
 
             armTarget.localRotation = Quaternion.Euler(0f, 0f, xRot);
         }
-        
 
-            else if (Physics.Raycast(PlayerCam.position, PlayerCam.forward, out RaycastHit raycastHit, 2f, LayerMask.NameToLayer("NailLayer")))
+        else if (Physics.Raycast(PlayerCam.position, PlayerCam.forward, out RaycastHit raycastHit, 2f, LayerMask.NameToLayer("NailLayer")))
+        {
+            if(Object.gameObject.layer == LayerMask.NameToLayer("Nail") || Object.gameObject.layer == LayerMask.NameToLayer("BronzePlate"))
             {
-                if(Object.gameObject.layer == LayerMask.NameToLayer("Nail") || Object.gameObject.layer == LayerMask.NameToLayer("BronzePlate"))
+                Object.CountdownCheck = false;
+                Object.targetPoint = 0f;
+                Object.targetTime = 10f;
+
+                if (raycastHit.transform.TryGetComponent(out TubeOutLine))
                 {
-                    Object.CountdownCheck = false;
-                    Object.targetPoint = 0f;
-                    Object.targetTime = 10f;
-
-                    if (raycastHit.transform.TryGetComponent(out TubeOutLine))
+                    TubeOutLine.enabled = true;
+                    if (Input.GetKeyDown(KeyCode.Mouse1))
                     {
-                        TubeOutLine.enabled = true;
-                        if (Input.GetKeyDown(KeyCode.Mouse1))
+                        
+                        switch (raycastHit.transform.name)
                         {
-                            
-                            switch (raycastHit.transform.name)
-                            {
-                                case "TestTube":
-                                    Object.ContainerHeight = 0.013f;
-                                break;
+                            case "TestTube":
+                                Object.ContainerHeight = 0.013f;
+                            break;
 
-                                case "Beaker":
-                                    Object.ContainerHeight = 0.005f;
-                                break;
+                            case "Beaker":
+                                Object.ContainerHeight = 0.005f;
+                            break;
 
-                                case "Erlenmeyer":
-                                    Object.ContainerHeight = 0.04f;
-                                break;
+                            case "Erlenmeyer":
+                                Object.ContainerHeight = 0.04f;
+                            break;
 
-                                case "FlorenceFlask":
-                                    Object.ContainerHeight = 0.02f;
-                                break;
+                            case "FlorenceFlask":
+                                Object.ContainerHeight = 0.02f;
+                            break;
 
-                                case "Electrolysis":
-                                    Object.ContainerHeight = 0.07f;
-                                break;
-                            }
-
-                            Object.TargetPosForNail = raycastHit.transform.GetChild(0).GetChild(0);
-                            Object.transform.SetParent(raycastHit.transform.GetChild(0).GetChild(0));
-                            Object.IsGrabbed = false;
-                            Object.GrabPoint = null;
-                            Object.IsOnPos = true;
+                            case "Electrolysis":
+                                Object.ContainerHeight = 0.07f;
+                            break;
                         }
+
+                        Object.TargetPosForNail = raycastHit.transform.GetChild(0).GetChild(0);
+                        Object.transform.SetParent(raycastHit.transform.GetChild(0).GetChild(0));
+                        Object.IsGrabbed = false;
+                        Object.GrabPoint = null;
+                        Object.IsOnPos = true;
                     }
                 }
             }
+        }
+
+        else if (Object.gameObject.layer == LayerMask.NameToLayer("Note"))
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                targetarmPos = -4f;
+            }
+            else if(Input.GetMouseButtonUp(1))
+            {
+                targetarmPos = 2.143f;
+            }
+        }
 
         if (Object != null && (((Object.gameObject.layer != LayerMask.NameToLayer("Nail")) && Object.gameObject.layer != LayerMask.NameToLayer("BronzePlate")) || !Physics.Raycast(PlayerCam.position, PlayerCam.forward, out _, 2f, LayerMask.NameToLayer("NailLayer"))) && TubeOutLine != null)
         {
@@ -178,6 +193,16 @@ public class GameManager : MonoBehaviour
         {
             TubeOutLine.enabled = false;
         }
+        if (targetarmPos == -4f)
+        {
+            zPos = Mathf.Lerp(zPos, targetarmPos, Time.deltaTime * 5f);
+        }
+        else if(targetarmPos == 2.143f)
+        {
+            zPos = Mathf.Lerp(zPos, targetarmPos, Time.deltaTime * 2f);
+        }
+
+        armTarget.localPosition = new Vector3(0f, 0f, zPos);
     }
 
 
@@ -316,11 +341,9 @@ public class GameManager : MonoBehaviour
                                     BarrelOutLine.enabled = false;
                                 }
                             }
-                            if (Object.name == "MetalContainer")
-                            {
-                                
-                            }
+                            IsInteractable = true;
                         }
+                        IsInteractable = false;
                     }
                 }
                 else if(BarrelOutLine != null)

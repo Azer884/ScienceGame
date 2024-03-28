@@ -1725,9 +1725,9 @@ public static bool FORCE_GLES_COMPATIBILITY = false;
                 RefreshMaterialProperties();
             }
 
-            /*if (act && _depthAware) {
+            if (act && _depthAware) {
                 Camera.current.depthTextureMode |= DepthTextureMode.Depth;
-            }*/
+            }
 
             if (act && _allowViewFromInside) {
                 CheckInsideOut();

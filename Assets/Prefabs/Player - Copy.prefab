@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 1079943770807476520}
   - component: {fileID: 1002018187426374787}
   m_Layer: 7
-  m_Name: Player
+  m_Name: Player - Copy
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1115,7 +1115,6 @@ GameObject:
   - component: {fileID: 483485381531260453}
   - component: {fileID: 8204127089039053609}
   - component: {fileID: 7615668919533591397}
-  - component: {fileID: 5036369192140556502}
   m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1200,34 +1199,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4587860570583266247}
   m_Enabled: 1
---- !u!114 &5036369192140556502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4587860570583266247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1532b32c9929ea141974a1e47a80bb2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brush:
-    brushTexture: {fileID: 2800000, guid: b8702b5a8624a114f82a6d09bc3ce746, type: 3}
-    brushNormalTexture: {fileID: 2800000, guid: 945b831b22eb06945bf77e00f16ff51a,
-      type: 3}
-    brushHeightTexture: {fileID: 2800000, guid: e1d77a6a5022d4442814ccb50d2a5d9d,
-      type: 3}
-    brushScale: 0.118
-    rotateAngle: 0
-    brushNormalBlend: 0.144
-    brushHeightBlend: 0.197
-    brushColor: {r: 0.4339623, g: 0, b: 0, a: 1}
-    colorBlendType: 0
-    normalBlendType: 0
-    heightBlendType: 0
-  useMethodType: 0
-  erase: 0
 --- !u!1 &4600991551420374309
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,12 +1537,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   armTarget: {fileID: 6298422108254888879}
-  LongNail: {fileID: 0}
+  LongNailOutLine: {fileID: 0}
   ShortNailOutLine: {fileID: 0}
-  ShortNail:
+  TargetClipPos:
   - {fileID: 0}
-  - {fileID: 0}
-  TargetClipPos: {fileID: 0}
   IsInteractable: 0
   TubeOutLine: {fileID: 0}
   CountdownCheck: 0
@@ -3088,12 +3057,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   armTarget: {fileID: 6298422108254888879}
-  LongNail: {fileID: 0}
+  LongNailOutLine: {fileID: 0}
   ShortNailOutLine: {fileID: 0}
-  ShortNail:
+  TargetClipPos:
   - {fileID: 0}
-  - {fileID: 0}
-  TargetClipPos: {fileID: 0}
   IsInteractable: 0
   TubeOutLine: {fileID: 0}
   CountdownCheck: 0

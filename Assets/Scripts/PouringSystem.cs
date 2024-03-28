@@ -19,6 +19,13 @@ public class PouringSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        for (int i = 0; i < liquid.liquidLayers.Length; i++)
+        {
+            if (liquid.liquidLayers[i].amount < 0.001f)
+            {
+                liquid.liquidLayers[i].amount = 0f;
+            }
+        }
         if (Vector3.Angle(Vector3.down, transform.parent.forward) <= 55f || Vector3.Angle(Vector3.down, transform.parent.right) <= 55f || Vector3.Angle(Vector3.down, -transform.parent.forward) <= 55f || Vector3.Angle(Vector3.down, -transform.parent.right) <= 55f)
         {
             for (int i = 0; i < liquid.liquidLayers.Length; i++)
