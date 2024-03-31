@@ -5,8 +5,8 @@ using UnityEngine;
 public class ElectricityCheck : MonoBehaviour
 {
     public bool ElectricityOn = false;
-    private bool start = false;
-    private bool end = false;
+    [HideInInspector]public bool start = false;
+    [HideInInspector]public bool end = false;
     
     void Update()
     {

@@ -23,6 +23,11 @@ public class ObjectGrabbable : MonoBehaviour
     [HideInInspector]public float targetPoint;
     private Coroutine countdownCoroutine;
     [HideInInspector]public float targetTime;
+    public Material[] materials;
+    private Outline outline;
+    
+    private float FireTargetTime = 10f;
+    private Coroutine FireCountdownCoroutine;
 
     private void Awake() 
     {
@@ -31,6 +36,10 @@ public class ObjectGrabbable : MonoBehaviour
         Cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
         OriginalParent = transform.parent;
         TargetPosForNail = transform;
+        if (transform.TryGetComponent(out outline))
+        {
+            outline.enabled = false;
+        }
     }
 
     public void Grab(Transform GrabPoint)
@@ -42,6 +51,10 @@ public class ObjectGrabbable : MonoBehaviour
         rb.constraints = RigidbodyConstraints.None;
         IsOnPos = false;
         Electricity = false;
+        if (outline != null)
+        {
+            outline.enabled = false;
+        }
         
         transform.parent = OriginalParent;
     }
@@ -142,6 +155,26 @@ public class ObjectGrabbable : MonoBehaviour
                 ChangeColor(transform.parent.parent.parent.GetComponentInChildren<LiquidVolume>(), FindAnyObjectByType<UiManager>().color[4]);
             }
         }
+
+        if(FindAnyObjectByType<Electrolysis>().OutlineCheck && outline != null)
+        {
+            outline.enabled = true;
+        }
+
+        if (transform.CompareTag("Match") && transform.childCount > 0)
+        {
+            if (transform.GetChild(0).childCount > 0 && transform.GetChild(0).GetChild(0).gameObject.activeSelf)
+            {
+                FireCountdownCoroutine ??= StartCoroutine(FireCountdown());
+            }
+            else if(FireCountdownCoroutine != null)
+            {
+                StopCoroutine(FireCountdownCoroutine);
+                FireCountdownCoroutine = null;
+                FireTargetTime = 10f;
+            }
+            
+        }
     }
     private IEnumerator Countdown()
     {
@@ -163,6 +196,113 @@ public class ObjectGrabbable : MonoBehaviour
         {
             CountdownCheck = false;
             targetPoint = 0f;
+            if (gameObject.layer == LayerMask.NameToLayer("Nail") && transform.GetChild(0).TryGetComponent(out Renderer renderer))
+            {
+                if (lv.liquidLayers[1].amount > .2f && lv.liquidLayers[1].amount <= .3f)
+                {
+                    renderer.material = materials[1]; 
+                }
+                else if (lv.liquidLayers[1].amount > .3f && lv.liquidLayers[1].amount <= .4f)
+                {
+                   renderer.material = materials[2];
+                }
+                else if (lv.liquidLayers[1].amount > .4f && lv.liquidLayers[1].amount <= .5f)
+                {
+                   renderer.material = materials[3];
+                }
+                else if (lv.liquidLayers[1].amount > .5f && lv.liquidLayers[1].amount <= .6f)
+                {
+                   renderer.material = materials[4];
+                }
+                else if (lv.liquidLayers[1].amount > .6f && lv.liquidLayers[1].amount <= .7f)
+                {
+                   renderer.material = materials[5];
+                }
+                else if (lv.liquidLayers[1].amount > .7f && lv.liquidLayers[1].amount <= .8f)
+                {
+                   renderer.material = materials[6];
+                }
+                else if (lv.liquidLayers[1].amount > .8f && lv.liquidLayers[1].amount <= .9f)
+                {
+                   renderer.material = materials[7];
+                }
+                else if (lv.liquidLayers[1].amount > .9 && lv.liquidLayers[1].amount < 1f)
+                {
+                   renderer.material = materials[8];
+                }
+                else if (lv.liquidLayers[1].amount >= .99f)
+                {
+                   renderer.material = materials[9];
+                }
+                else
+                {
+                   renderer.material = materials[0];
+                }
+                if (outline != null)
+                {
+                    outline.enabled = true;
+                }
+            }
+
+            else if (gameObject.layer == LayerMask.NameToLayer("BronzePlate") && transform.GetChild(0).TryGetComponent(out Renderer BronzeRenderer))
+            {
+                if (lv.liquidLayers[1].amount > .2f && lv.liquidLayers[1].amount <= .3f)
+                {
+                    BronzeRenderer.material = materials[1]; 
+                }
+                else if (lv.liquidLayers[1].amount > .3f && lv.liquidLayers[1].amount <= .4f)
+                {
+                   BronzeRenderer.material = materials[2];
+                }
+                else if (lv.liquidLayers[1].amount > .4f && lv.liquidLayers[1].amount <= .5f)
+                {
+                   BronzeRenderer.material = materials[3];
+                }
+                else if (lv.liquidLayers[1].amount > .5f && lv.liquidLayers[1].amount <= .6f)
+                {
+                   BronzeRenderer.material = materials[4];
+                }
+                else if (lv.liquidLayers[1].amount > .6f && lv.liquidLayers[1].amount <= .7f)
+                {
+                   BronzeRenderer.material = materials[5];
+                }
+                else if (lv.liquidLayers[1].amount > .7f && lv.liquidLayers[1].amount <= .8f)
+                {
+                   BronzeRenderer.material = materials[6];
+                }
+                else if (lv.liquidLayers[1].amount > .8f && lv.liquidLayers[1].amount <= .9f)
+                {
+                   BronzeRenderer.material = materials[7];
+                }
+                else if (lv.liquidLayers[1].amount > .9 && lv.liquidLayers[1].amount < 1f)
+                {
+                   BronzeRenderer.material = materials[8];
+                }
+                else if (lv.liquidLayers[1].amount >= .99f)
+                {
+                   BronzeRenderer.material = materials[9];
+                }
+                else
+                {
+                   BronzeRenderer.material = materials[0];
+                }
+                if (outline != null)
+                {
+                    outline.enabled = true;
+                }
+            }
         }
+    }
+    private IEnumerator FireCountdown()
+    {
+        FireTargetTime = 10f;
+        while (FireTargetTime > 0)
+        {
+            yield return new WaitForSeconds(1);
+            FireTargetTime--;
+        }
+        transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+
+        FireCountdownCoroutine = null;
     }
 }

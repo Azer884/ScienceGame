@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform PlayerCam;
     [SerializeField] private LayerMask PickupLayer;
     [SerializeField] private LayerMask OutLineLayer;
-    private ObjectGrabbable Object;
+    [HideInInspector]public ObjectGrabbable Object;
     private float xRot;
     public Transform armTarget;
 
@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     private float targetarmPos = 2.143f;
     private float zPos = 2.143f;
+
+    public Outline LampOutLine;
 
 
     private void Update()
@@ -171,6 +173,10 @@ public class GameManager : MonoBehaviour
 
         else if (Object.gameObject.layer == LayerMask.NameToLayer("Note"))
         {
+            targetXRot = 0f;
+            xRot = Mathf.Lerp(xRot, targetXRot, Time.deltaTime * rotationSpeed);
+
+            armTarget.localRotation = Quaternion.Euler(0f, 0f, xRot);
             if (Input.GetMouseButtonDown(1))
             {
                 targetarmPos = -4f;
@@ -351,6 +357,31 @@ public class GameManager : MonoBehaviour
                     BarrelOutLine.enabled = false;
                 }
             }
+            else if (Object.CompareTag("Match"))
+            {
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit raycastHit, 2f))
+                {
+                    if(raycastHit.transform.CompareTag("Lamp") && raycastHit.transform.TryGetComponent(out LampOutLine))
+                    {
+                        LampOutLine.enabled = true;
+                        if (Input.GetKeyDown(KeyCode.Mouse1))
+                        {
+                            Object.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+                            LampOutLine.enabled = false;
+                        }
+                    }
+                    else if (LampOutLine != null)
+                    {
+                        LampOutLine.enabled = false;
+                    }
+                }
+                
+                else if (LampOutLine != null)
+                {
+                    LampOutLine.enabled = false;
+                }
+                
+            }
         }
         else
         {
@@ -364,6 +395,10 @@ public class GameManager : MonoBehaviour
             if (BarrelOutLine != null)
             {
                 BarrelOutLine.enabled = false;
+            }
+            if (LampOutLine != null)
+            {
+                LampOutLine.enabled = false;
             }
         }
         

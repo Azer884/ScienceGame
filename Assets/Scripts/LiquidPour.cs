@@ -18,11 +18,27 @@ public class LiquidPour : MonoBehaviour
     {
         lv = transform.parent.GetComponent<LiquidVolume> ();
         OriginalRotation = transform.localRotation;
-        yMax = transform.parent.Find("TopLevel").localPosition.y;
-        yMin = transform.parent.Find("BottomLevel").localPosition.y;
+        if (transform.parent.parent.name == "Electrolysis")
+        {
+            yMax = transform.parent.Find("TopLevel").localPosition.z;
+            yMin = transform.parent.Find("BottomLevel").localPosition.z;
+        }
+        else
+        {
+            yMax = transform.parent.Find("TopLevel").localPosition.y;
+            yMin = transform.parent.Find("BottomLevel").localPosition.y;
+        }
     }
-    private void Update() {
-        transform.SetLocalPositionAndRotation(Vector3.up * WaterCheckPos(lv, yMax, yMin), OriginalRotation);
+    private void Update() 
+    {
+        if (transform.parent.parent.name == "Electrolysis")
+        {
+            transform.SetLocalPositionAndRotation(Vector3.forward * WaterCheckPos(lv, yMax, yMin), OriginalRotation);
+        }
+        else
+        {
+            transform.SetLocalPositionAndRotation(Vector3.up * WaterCheckPos(lv, yMax, yMin), OriginalRotation);
+        }
     }
 
     void OnParticleCollision(GameObject other)
@@ -39,7 +55,7 @@ public class LiquidPour : MonoBehaviour
             } 
             else 
             {
-                transform.localRotation = Quaternion.Euler (0, 0, 0);
+                transform.localRotation = OriginalRotation;
             }
         }
         else if(other.layer == LayerMask.NameToLayer("Powder") && other.CompareTag("Metal"))

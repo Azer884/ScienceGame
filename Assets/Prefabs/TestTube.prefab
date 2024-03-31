@@ -5322,7 +5322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _topology: 1
   _detail: 51
-  _level: 0.25019997
+  _level: 0.00029999999
   _levelMultiplier: 1
   _liquidLayers:
   - layerName: Layer 1
@@ -5338,13 +5338,13 @@ MonoBehaviour:
     bubblesOpacity: 0
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0.25019997
-    currentColor: {r: 0.22601692, g: 0.012723924, b: 0.7842285, a: 0.09837151}
-    currentMurkiness: 0.00019984014
-    currentColor2: {r: 0.00039968028, g: 0.00039968028, b: 0.00039968028, a: 1}
+    currentAmount: 0.00029999999
+    currentColor: {r: 0.6255059, g: 0.59224474, b: 0.86007196, a: 0.3751634}
+    currentMurkiness: 0.16666667
+    currentColor2: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
     currentBubblesOpacity: 0
   - layerName: Layer 0
-    amount: 0.25
+    amount: 0
     density: 1
     color: {r: 0.22553733, g: 0.012028219, b: 0.78413737, a: 0.09803922}
     miscible: 1
@@ -5356,10 +5356,10 @@ MonoBehaviour:
     bubblesOpacity: 1
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0.25019997
-    currentColor: {r: 0.22601692, g: 0.012723924, b: 0.7842285, a: 0.09837151}
-    currentMurkiness: 0.00019984014
-    currentColor2: {r: 0.00039968028, g: 0.00039968028, b: 0.00039968028, a: 1}
+    currentAmount: 0.00029999999
+    currentColor: {r: 0.6255059, g: 0.59224474, b: 0.86007196, a: 0.3751634}
+    currentMurkiness: 0.16666667
+    currentColor2: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
     currentBubblesOpacity: 0
   - layerName: Layer 2
     amount: 0
@@ -5392,10 +5392,10 @@ MonoBehaviour:
     bubblesOpacity: 1
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0.25019997
-    currentColor: {r: 0.22601692, g: 0.012723924, b: 0.7842285, a: 0.09837151}
-    currentMurkiness: 0.00019984014
-    currentColor2: {r: 0.00039968028, g: 0.00039968028, b: 0.00039968028, a: 1}
+    currentAmount: 0.00029999999
+    currentColor: {r: 0.6255059, g: 0.59224474, b: 0.86007196, a: 0.3751634}
+    currentMurkiness: 0.16666667
+    currentColor2: {r: 0.33333334, g: 0.33333334, b: 0.33333334, a: 1}
     currentBubblesOpacity: 0
   _smoothContactSurface: 3
   _ditherStrength: 0.5
@@ -5667,6 +5667,7 @@ MonoBehaviour:
   CountdownCheck: 0
   targetPoint: 0
   targetTime: 0
+  materials: []
 --- !u!114 &7643453247964279145
 MonoBehaviour:
   m_ObjectHideFlags: 0

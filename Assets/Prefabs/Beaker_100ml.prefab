@@ -415,6 +415,7 @@ MonoBehaviour:
   CountdownCheck: 0
   targetPoint: 0
   targetTime: 0
+  materials: []
 --- !u!114 &3699520566553616385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,7 +551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _topology: 10
   _detail: 51
-  _level: 0.1602
+  _level: 0.0002
   _levelMultiplier: 1
   _liquidLayers:
   - layerName: Layer 0
@@ -566,13 +567,13 @@ MonoBehaviour:
     bubblesOpacity: 1
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0.1602
-    currentColor: {r: 0.96453196, g: 0.5337691, b: 0.9724559, a: 0.09855817}
-    currentMurkiness: 0.00031210986
-    currentColor2: {r: 0.0006242197, g: 0.0006242197, b: 0.0006242197, a: 1}
+    currentAmount: 0.0002
+    currentColor: {r: 0.89803916, g: 0.73921573, b: 0.9745098, a: 0.0627451}
+    currentMurkiness: 0
+    currentColor2: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     currentBubblesOpacity: 0
   - layerName: Layer 1
-    amount: 0.16
+    amount: 0
     density: 1
     color: {r: 0.9647059, g: 0.53333336, b: 0.972549, a: 0.09803922}
     miscible: 1
@@ -584,10 +585,10 @@ MonoBehaviour:
     bubblesOpacity: 1
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0.1602
-    currentColor: {r: 0.96453196, g: 0.5337691, b: 0.9724559, a: 0.09855817}
-    currentMurkiness: 0.00031210986
-    currentColor2: {r: 0.0006242197, g: 0.0006242197, b: 0.0006242197, a: 1}
+    currentAmount: 0.0002
+    currentColor: {r: 0.89803916, g: 0.73921573, b: 0.9745098, a: 0.0627451}
+    currentMurkiness: 0
+    currentColor2: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     currentBubblesOpacity: 0
   - layerName: Layer 2
     amount: 0
@@ -602,28 +603,28 @@ MonoBehaviour:
     bubblesOpacity: 1
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0.000033333334
-    currentColor: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 1}
+    currentAmount: 0.00006666667
+    currentColor: {r: 0.47112468, g: 0.47112468, b: 0.47112468, a: 1}
     currentMurkiness: 0
     currentColor2: {r: 0, g: 0, b: 0, a: 1}
     currentBubblesOpacity: 0
   - layerName: Layer 3
     amount: 0
-    density: 1
+    density: 3
     color: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 1}
     miscible: 1
-    murkiness: 0.5
+    murkiness: 0
     murkColor: {r: 0, g: 0, b: 0, a: 1}
     scale: 0.3
-    viscosity: 1
+    viscosity: 0
     adjustmentSpeed: 1
     bubblesOpacity: 1
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0.1602
-    currentColor: {r: 0.96453196, g: 0.5337691, b: 0.9724559, a: 0.09855817}
-    currentMurkiness: 0.00031210986
-    currentColor2: {r: 0.0006242197, g: 0.0006242197, b: 0.0006242197, a: 1}
+    currentAmount: 0.00006666667
+    currentColor: {r: 0.47112468, g: 0.47112468, b: 0.47112468, a: 1}
+    currentMurkiness: 0
+    currentColor2: {r: 0, g: 0, b: 0, a: 1}
     currentBubblesOpacity: 0
   _smoothContactSurface: 3
   _ditherStrength: 0.5
@@ -5686,9 +5687,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 14
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &4707525937906859267
 MonoBehaviour:

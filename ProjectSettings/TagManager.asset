@@ -12,6 +12,8 @@ TagManager:
   - MaleConnector
   - Metal
   - Salt
+  - Lamp
+  - Match
   layers:
   - Default
   - TransparentFX

@@ -70,6 +70,10 @@ public class UiManager : MonoBehaviour
                         {
                             Objectname.text += " (Cu<sup>2+</sup>)";
                         }
+                        else if (lv.liquidLayers[1].amount > 0.01f && ColorCheck(lv.liquidLayers[1].color, color[5]))
+                        {
+                            Objectname.text += " (NaOH)";
+                        }
 
                         if (lv.liquidLayers[2].amount > 0.01f && ColorCheck(lv.liquidLayers[2].color, PowerColor[0]))
                         {
@@ -79,7 +83,7 @@ public class UiManager : MonoBehaviour
                                 Objectname.text += " " + (int)(lv.liquidLayers[2].amount * 100) + "%";
                             }
                         }
-                        if (lv.liquidLayers[3].amount > 0.01f && ColorCheck(lv.liquidLayers[3].color, PowerColor[1]))
+                        if (lv.liquidLayers.Length > 3 && lv.liquidLayers[3].amount > 0.001f && ColorCheck(lv.liquidLayers[3].color, PowerColor[1]))
                         {
                             Objectname.text += " (NaCl)";
                             if (raycastHit.transform.name == "SaltContainer")

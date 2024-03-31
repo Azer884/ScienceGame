@@ -77,10 +77,15 @@ MonoBehaviour:
   GrabPoint: {fileID: 0}
   IsGrabbed: 0
   IsClipOnNail: 0
+  targetClip: {fileID: 0}
+  Electricity: 0
   IsOnPos: 0
   TargetPosForNail: {fileID: 0}
   ContainerHeight: 0
   IsConnected: 0
+  CountdownCheck: 0
+  targetPoint: 0
+  targetTime: 0
 --- !u!1 &6292926634270200249
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +363,24 @@ MonoBehaviour:
     currentMurkiness: 0
     currentColor2: {r: 0, g: 0, b: 0, a: 1}
     currentBubblesOpacity: 0
+  - layerName: Layer 0
+    amount: 1
+    density: 1
+    color: {r: 0.12156863, g: 0.12156863, b: 0.12156863, a: 1}
+    miscible: 0
+    murkiness: 0
+    murkColor: {r: 0, g: 0, b: 0, a: 1}
+    scale: 0.001
+    viscosity: 1
+    adjustmentSpeed: 1
+    bubblesOpacity: 0
+    baseLevel: 0
+    currentBaseLevel: 0
+    currentAmount: 0
+    currentColor: {r: 0.22553733, g: 0.012028219, b: 0.78413737, a: 0.5}
+    currentMurkiness: 0.5
+    currentColor2: {r: 0, g: 0, b: 0, a: 1}
+    currentBubblesOpacity: 1
   _smoothContactSurface: 3
   _ditherStrength: 0.5
   _layersAdjustmentSpeed: 1

@@ -468,7 +468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _topology: 10
   _detail: 51
-  _level: 0.3001
+  _level: 0.0001
   _levelMultiplier: 1
   _liquidLayers:
   - layerName: Layer 0
@@ -490,7 +490,7 @@ MonoBehaviour:
     currentColor2: {r: 1, g: 1, b: 1, a: 1}
     currentBubblesOpacity: 0
   - layerName: Layer 1
-    amount: 0.3
+    amount: 0
     density: 1
     color: {r: 0.21226418, g: 0.6691362, b: 1, a: 0.09803922}
     miscible: 0
@@ -502,7 +502,7 @@ MonoBehaviour:
     bubblesOpacity: 1
     baseLevel: 0
     currentBaseLevel: 0
-    currentAmount: 0.3
+    currentAmount: 0
     currentColor: {r: 0.21226418, g: 0.6691362, b: 1, a: 0.09803922}
     currentMurkiness: 0
     currentColor2: {r: 0, g: 0, b: 0, a: 1}
@@ -536,8 +536,8 @@ MonoBehaviour:
     viscosity: 1
     adjustmentSpeed: 1
     bubblesOpacity: 1
-    baseLevel: 0.3
-    currentBaseLevel: 0.3
+    baseLevel: 0
+    currentBaseLevel: 0
     currentAmount: 0.0001
     currentColor: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 1}
     currentMurkiness: 0.5
@@ -814,6 +814,7 @@ MonoBehaviour:
   CountdownCheck: 0
   targetPoint: 0
   targetTime: 0
+  materials: []
 --- !u!114 &5382598418929741231
 MonoBehaviour:
   m_ObjectHideFlags: 0

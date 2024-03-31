@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 159496459828168409}
   - component: {fileID: 746275115866222531}
   - component: {fileID: 2757257458027216467}
+  - component: {fileID: 8322233786199475057}
   m_Layer: 19
   m_Name: BronzePlate
   m_TagString: Untagged
@@ -76,6 +77,8 @@ MonoBehaviour:
   GrabPoint: {fileID: 0}
   IsGrabbed: 0
   IsClipOnNail: 0
+  targetClip: {fileID: 0}
+  Electricity: 0
   IsOnPos: 0
   TargetPosForNail: {fileID: 0}
   ContainerHeight: 0
@@ -83,6 +86,35 @@ MonoBehaviour:
   CountdownCheck: 0
   targetPoint: 0
   targetTime: 0
+  materials:
+  - {fileID: 2100000, guid: f179003e13377c14da07afb7dfb246c1, type: 2}
+  - {fileID: 2100000, guid: f55e6deb01870454189c79194e128d44, type: 2}
+  - {fileID: 2100000, guid: 5a1929052b85c2042bbc2344616430b4, type: 2}
+  - {fileID: 2100000, guid: 7e5ec1b688981654181f7178f1eec136, type: 2}
+  - {fileID: 2100000, guid: 9c1fa29330d189c42b63240b37bd0883, type: 2}
+  - {fileID: 2100000, guid: 5f24b6c79360a0248ba319bfe61265b9, type: 2}
+  - {fileID: 2100000, guid: 88b9612595e23a0418815a9f9afeaf76, type: 2}
+  - {fileID: 2100000, guid: b2f38fd818e702f4f9a49d0a95ec9619, type: 2}
+  - {fileID: 2100000, guid: 553478ba47a9c98499c9a8a0899584fc, type: 2}
+  - {fileID: 2100000, guid: 3195cf5148a4e0042ac609fdd8a19010, type: 2}
+--- !u!114 &8322233786199475057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7971456316166967491}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0, g: 1, b: 0, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8999124191009350381
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +177,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 93f77360d1d95a847aaaafa93a645f7f, type: 2}
+  - {fileID: 2100000, guid: f179003e13377c14da07afb7dfb246c1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
