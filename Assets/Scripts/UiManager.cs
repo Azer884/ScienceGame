@@ -72,7 +72,7 @@ public class UiManager : MonoBehaviour
                         }
                         else if (lv.liquidLayers[1].amount > 0.01f && ColorCheck(lv.liquidLayers[1].color, color[5]))
                         {
-                            Objectname.text += " (NaOH)";
+                            Objectname.text += " (Na<sup>+</sup>, OH<sup>-</sup>)";
                         }
 
                         if (lv.liquidLayers[2].amount > 0.01f && ColorCheck(lv.liquidLayers[2].color, PowerColor[0]))

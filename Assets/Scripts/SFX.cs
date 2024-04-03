@@ -16,7 +16,6 @@ public class SFX : MonoBehaviour
         FootSteps.SetActive(false);
         sink.transform.GetChild(0).gameObject.SetActive(false);
         ChairSfx.SetActive(false);
-        DontDestroyOnLoad(gameObject);
         timer = timerDuration;
     }
 
@@ -24,7 +23,6 @@ public class SFX : MonoBehaviour
     void Update()
     {
         FootSFX();
-        SinkOpenning();
         ChairSFX();
     }
 
@@ -41,17 +39,7 @@ public class SFX : MonoBehaviour
             FootSteps.SetActive(false);
         }
     }
-    void SinkOpenning()
-    {
-        if(sink.IsOpened)
-        {
-            sink.transform.GetChild(0).gameObject.SetActive(true);
-        }
-        else
-        {
-            sink.transform.GetChild(0).gameObject.SetActive(false);
-        }
-    }
+    
     void ChairSFX()
     {
         if (ChairSfx.transform.parent.GetComponent<Rigidbody>().velocity.magnitude > 0.1f)

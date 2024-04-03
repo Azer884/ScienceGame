@@ -93,6 +93,8 @@ public class GameManager : MonoBehaviour
                     {
                         if (sink.transform.TryGetComponent(out Sink sink1))
                         {
+                            sink.transform.GetChild(0).gameObject.SetActive(true);
+                            StartCoroutine(DisableGameObjectAfterDelay(sink.transform.GetChild(0).gameObject, .566f));
                             if(!sink1.IsOpened)
                             {
                                 sink1.IsOpened = true;
@@ -139,7 +141,8 @@ public class GameManager : MonoBehaviour
                         TubeOutLine.enabled = true;
                         if (Input.GetKeyDown(KeyCode.Mouse1))
                         {
-                            
+                            Object.transform.GetChild(2).gameObject.SetActive(true);
+                            StartCoroutine(DisableGameObjectAfterDelay(Object.transform.GetChild(2).gameObject, .5f));
                             switch (raycastHit.transform.name)
                             {
                                 case "TestTube":
@@ -341,6 +344,8 @@ public class GameManager : MonoBehaviour
                                     lv.liquidLayers[1].amount += 0.2f;
                                     lv.UpdateLayers(true);
                                     BarrelOutLine.enabled = false;
+                                    BarrelOutLine.transform.GetChild(4).gameObject.SetActive(true);
+                                    StartCoroutine(DisableGameObjectAfterDelay(BarrelOutLine.transform.GetChild(4).gameObject, .75f));
                                 }
                                 else if (lv.liquidLayers[1].amount == 0f)
                                 {
@@ -348,6 +353,8 @@ public class GameManager : MonoBehaviour
                                     lv.liquidLayers[1].amount += 0.2f;
                                     lv.UpdateLayers(true);
                                     BarrelOutLine.enabled = false;
+                                    BarrelOutLine.transform.GetChild(4).gameObject.SetActive(true);
+                                    StartCoroutine(DisableGameObjectAfterDelay(BarrelOutLine.transform.GetChild(4).gameObject, .75f));
                                 }
                             }
                             IsInteractable = true;
@@ -407,7 +414,6 @@ public class GameManager : MonoBehaviour
         
     }
 
-
     bool CheckChildLiquidAmount(Transform parent, int i)
     {
         bool v = false;
@@ -423,5 +429,10 @@ public class GameManager : MonoBehaviour
             }
         }
         return v;
+    }
+    IEnumerator DisableGameObjectAfterDelay(GameObject obj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        obj.SetActive(false);
     }
 }
