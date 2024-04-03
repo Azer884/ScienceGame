@@ -25,11 +25,11 @@ public class UiManager : MonoBehaviour
         if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit raycastHit, 2f, layerMask))
         {
 
-            Objectname.text = raycastHit.transform.name;
+            Objectname.text = raycastHit.transform.name + "\n";
 
-            if (Objectname.text == "End" || Objectname.text == "Start" || raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Wire"))
+            if (raycastHit.transform.name == "End" || raycastHit.transform.name == "Start" || raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Wire"))
             {
-                Objectname.text = raycastHit.transform.parent.name;
+                Objectname.text = raycastHit.transform.parent.name + "\n";
             }
 
             Objectname.text = RemoveNumbers(Objectname.text);
@@ -98,7 +98,7 @@ public class UiManager : MonoBehaviour
         }
         else
         {
-            Objectname.text = null;
+            Invoke(nameof(EmptyName), 1f);
         }
     }
 
@@ -147,5 +147,9 @@ public class UiManager : MonoBehaviour
         bool check = (Math.Abs(r - r1) <= 1) && (Math.Abs(g - g1) <= 1) && (Math.Abs(b - b1) <= 1);
 
         return check;
+    }
+    void EmptyName()
+    {
+        Objectname.text = null;
     }
 }

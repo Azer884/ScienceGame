@@ -34,8 +34,8 @@ public class Electrolysis : MonoBehaviour
         BubbleSys();
         if (Check)
         {
-            lv.liquidLayers[1].color = FindAnyObjectByType<UiManager>().color[5];
-            lv.liquidLayers[0].color = Color.Lerp(lv.liquidLayers[0].color, FindAnyObjectByType<UiManager>().color[5], Time.deltaTime * .001f);
+            lv.liquidLayers[1].color = FindAnyObjectByType<UISpawner>().color[5];
+            lv.liquidLayers[0].color = Color.Lerp(lv.liquidLayers[0].color, FindAnyObjectByType<UISpawner>().color[5], Time.deltaTime * .001f);
             lv.liquidLayers[3].amount = Mathf.Lerp(lv.liquidLayers[3].amount, 0f, Time.deltaTime * .001f);
             lv.UpdateLayers(true);
         }
@@ -111,13 +111,14 @@ public class Electrolysis : MonoBehaviour
             Check = true;
         }
 
+        Check = false;
+        OutlineCheck = true;
+        transform.parent.parent.GetComponent<Outline>().enabled = true;
         lv.liquidLayers[3].amount = 0f;
         lv.liquidLayers[1].amount = lv.liquidLayers[0].amount;
         lv.liquidLayers[0].amount = 0f;
         lv.UpdateLayers(true);
-        Check = false;
         lv.liquidLayers[0].color = WaterColor;
-        OutlineCheck = true;
         
         countdownCoroutine = null;
     }

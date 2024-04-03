@@ -53,7 +53,7 @@ public class ObjectGrabbable : MonoBehaviour
         Electricity = false;
         if (outline != null)
         {
-            outline.enabled = false;
+           // outline.enabled = false;
         }
         
         transform.parent = OriginalParent;
@@ -156,10 +156,10 @@ public class ObjectGrabbable : MonoBehaviour
             }
         }
 
-        if(FindAnyObjectByType<Electrolysis>().OutlineCheck && outline != null)
+        /*if(FindAnyObjectByType<Electrolysis>().OutlineCheck && outline != null)
         {
             outline.enabled = true;
-        }
+        }*/
 
         if (transform.CompareTag("Match") && transform.childCount > 0)
         {

@@ -126,46 +126,49 @@ public class GameManager : MonoBehaviour
 
         else if (Physics.Raycast(PlayerCam.position, PlayerCam.forward, out RaycastHit raycastHit, 2f, LayerMask.NameToLayer("NailLayer")))
         {
-            if(Object.gameObject.layer == LayerMask.NameToLayer("Nail") || Object.gameObject.layer == LayerMask.NameToLayer("BronzePlate"))
+            if (raycastHit.transform.childCount > 0 && raycastHit.transform.GetChild(0).childCount > 0 && !(raycastHit.transform.GetChild(0).GetChild(0).childCount > 0))
             {
-                Object.CountdownCheck = false;
-                Object.targetPoint = 0f;
-                Object.targetTime = 10f;
-
-                if (raycastHit.transform.TryGetComponent(out TubeOutLine))
+                if(Object.gameObject.layer == LayerMask.NameToLayer("Nail") || Object.gameObject.layer == LayerMask.NameToLayer("BronzePlate"))
                 {
-                    TubeOutLine.enabled = true;
-                    if (Input.GetKeyDown(KeyCode.Mouse1))
+                    Object.CountdownCheck = false;
+                    Object.targetPoint = 0f;
+                    Object.targetTime = 10f;
+
+                    if (raycastHit.transform.TryGetComponent(out TubeOutLine))
                     {
-                        
-                        switch (raycastHit.transform.name)
+                        TubeOutLine.enabled = true;
+                        if (Input.GetKeyDown(KeyCode.Mouse1))
                         {
-                            case "TestTube":
-                                Object.ContainerHeight = 0.013f;
-                            break;
+                            
+                            switch (raycastHit.transform.name)
+                            {
+                                case "TestTube":
+                                    Object.ContainerHeight = 0.013f;
+                                break;
 
-                            case "Beaker":
-                                Object.ContainerHeight = 0.005f;
-                            break;
+                                case "Beaker":
+                                    Object.ContainerHeight = 0.005f;
+                                break;
 
-                            case "Erlenmeyer":
-                                Object.ContainerHeight = 0.04f;
-                            break;
+                                case "Erlenmeyer":
+                                    Object.ContainerHeight = 0.04f;
+                                break;
 
-                            case "FlorenceFlask":
-                                Object.ContainerHeight = 0.02f;
-                            break;
+                                case "FlorenceFlask":
+                                    Object.ContainerHeight = 0.02f;
+                                break;
 
-                            case "Electrolysis":
-                                Object.ContainerHeight = 0.07f;
-                            break;
+                                case "Electrolysis":
+                                    Object.ContainerHeight = 0.07f;
+                                break;
+                            }
+
+                            Object.TargetPosForNail = raycastHit.transform.GetChild(0).GetChild(0);
+                            Object.transform.SetParent(raycastHit.transform.GetChild(0).GetChild(0));
+                            Object.IsGrabbed = false;
+                            Object.GrabPoint = null;
+                            Object.IsOnPos = true;
                         }
-
-                        Object.TargetPosForNail = raycastHit.transform.GetChild(0).GetChild(0);
-                        Object.transform.SetParent(raycastHit.transform.GetChild(0).GetChild(0));
-                        Object.IsGrabbed = false;
-                        Object.GrabPoint = null;
-                        Object.IsOnPos = true;
                     }
                 }
             }

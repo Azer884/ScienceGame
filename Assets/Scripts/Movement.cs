@@ -13,7 +13,6 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private float speed;
     [SerializeField] private float Sens;
-    [SerializeField] private  float Jump;
 
     private void Start() {
         Cursor.lockState = CursorLockMode.Locked;
@@ -30,14 +29,6 @@ public class Movement : MonoBehaviour
     {
         Vector3 MoveVector = transform.TransformDirection(PlayerMovement) * speed ;
         rb.velocity = new Vector3(MoveVector.x, rb.velocity.y, MoveVector.z);
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (Physics.CheckSphere(GroundCheck.position, 0.1f, FloorMask))
-            {
-                rb.AddForce(Vector3.up * Jump, ForceMode.Impulse);
-            }
-        }
     }
 
     void MoveCam()

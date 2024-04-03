@@ -24,7 +24,7 @@ public class FireCheck : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        if(lv.liquidLayers[2].amount > .1f && lv.liquidLayers[1].amount > 0.1f && UiManager.ColorCheck(lv.liquidLayers[1].color, FindAnyObjectByType<UiManager>().color[2]))
+        if(lv.liquidLayers[2].amount > .1f && lv.liquidLayers[1].amount > 0.1f && UiManager.ColorCheck(lv.liquidLayers[1].color, FindAnyObjectByType<UISpawner>().color[2]))
         {
             countdownCoroutine ??= StartCoroutine(Countdown());
         }
@@ -56,12 +56,12 @@ public class FireCheck : MonoBehaviour
     {
         if (Check)
         {
-            lv.liquidLayers[1].color = Color.Lerp(lv.liquidLayers[1].color ,FindAnyObjectByType<UiManager>().color[1], TargetTime);
+            lv.liquidLayers[1].color = Color.Lerp(lv.liquidLayers[1].color ,FindAnyObjectByType<UISpawner>().color[1], TargetTime);
             lv.UpdateLayers(true);
             TargetTime += Time.deltaTime * .0001f;
             lv.liquidLayers[2].amount = 0f;
             particleSystem.gameObject.SetActive(true);
-            if (lv.liquidLayers[1].color == FindAnyObjectByType<UiManager>().color[1])
+            if (lv.liquidLayers[1].color == FindAnyObjectByType<UISpawner>().color[1])
             {
                 Check = false;
                 TargetTime = 0f;
