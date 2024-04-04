@@ -15,7 +15,13 @@ public class CollisionDetector : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (transform.TryGetComponent(out AudioSource audioSource) && timer <= 0)
         {
-            audioSource.Play();
+            audioSource.gameObject.SetActive(true);
+            StartCoroutine(DisableGameObjectAfterDelay(audioSource.gameObject, .75f));
         }
+    }
+    IEnumerator DisableGameObjectAfterDelay(GameObject obj, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        obj.SetActive(false);
     }
 }

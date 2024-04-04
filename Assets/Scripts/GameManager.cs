@@ -344,8 +344,7 @@ public class GameManager : MonoBehaviour
                                     lv.liquidLayers[1].amount += 0.2f;
                                     lv.UpdateLayers(true);
                                     BarrelOutLine.enabled = false;
-                                    BarrelOutLine.transform.GetChild(4).gameObject.SetActive(true);
-                                    StartCoroutine(DisableGameObjectAfterDelay(BarrelOutLine.transform.GetChild(4).gameObject, .75f));
+                                    BarrelOutLine.transform.GetChild(4).GetComponent<AudioSource>().Play();
                                 }
                                 else if (lv.liquidLayers[1].amount == 0f)
                                 {
@@ -353,8 +352,7 @@ public class GameManager : MonoBehaviour
                                     lv.liquidLayers[1].amount += 0.2f;
                                     lv.UpdateLayers(true);
                                     BarrelOutLine.enabled = false;
-                                    BarrelOutLine.transform.GetChild(4).gameObject.SetActive(true);
-                                    StartCoroutine(DisableGameObjectAfterDelay(BarrelOutLine.transform.GetChild(4).gameObject, .75f));
+                                    BarrelOutLine.transform.GetChild(4).GetComponent<AudioSource>().Play();
                                 }
                             }
                             IsInteractable = true;
