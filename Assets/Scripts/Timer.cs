@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour
     public GameObject gameOver;
     public TextMeshProUGUI timeLeft;
     public float timeStartAt;
+    public float delay = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +45,7 @@ public class Timer : MonoBehaviour
     {
         gameOver.SetActive(true);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(delay);
 
         SceneManager.LoadScene(0);
     }

@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 8368531733335951512}
   - component: {fileID: 7789064154368273085}
   - component: {fileID: 7377588420673746888}
-  m_Layer: 11
+  m_Layer: 21
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,11 +269,11 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7953303709076421837}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f653454c75909c047a31afcb1a99bed2, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1.89
   Loop: 0

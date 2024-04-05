@@ -6,22 +6,29 @@ public class CollisionDetector : MonoBehaviour
 {
     private float timerDuration = 18.7f;
     private float timer;
+    private AudioSource audioSource;
     private void Start() {
         timer = timerDuration;
+        if (transform.TryGetComponent(out audioSource))
+        {
+            audioSource.playOnAwake = true;
+            audioSource.enabled = false;
+            gameObject.layer = LayerMask.NameToLayer("Trigger");
+        }
     }
     private void Update() {
         timer -= Time.deltaTime;
     }
     private void OnTriggerEnter(Collider other) {
-        if (transform.TryGetComponent(out AudioSource audioSource) && timer <= 0)
+        if (audioSource != null && timer <= 0)
         {
-            audioSource.gameObject.SetActive(true);
-            StartCoroutine(DisableGameObjectAfterDelay(audioSource.gameObject, .75f));
+            audioSource.enabled = true;
+            StartCoroutine(DisableGameObjectAfterDelay(audioSource, 1f));
         }
     }
-    IEnumerator DisableGameObjectAfterDelay(GameObject obj, float delay)
+    IEnumerator DisableGameObjectAfterDelay(AudioSource obj, float delay)
     {
         yield return new WaitForSeconds(delay);
-        obj.SetActive(false);
+        obj.enabled = false;
     }
 }

@@ -98,5 +98,9 @@ public class Tutorial : MonoBehaviour
         {
             outlines[1].enabled = false;
         }
+        if(outlines[1].GetComponentInParent<Outline>().enabled)
+        {
+            outlines[8].enabled = false;
+        }
     }
 }
