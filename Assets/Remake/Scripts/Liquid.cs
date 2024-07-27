@@ -9,18 +9,23 @@ public class Liquid : MonoBehaviour
     public UpdateMode updateMode;
     [ColorUsage(true, true)]
     public Color color;
-
-    [SerializeField]
-    float MaxWobble = 0.03f;
+    [ColorUsage(true, true)]
+    public Color topColor;
+    public float MaxWobble = 0.03f;
     [SerializeField]
     float WobbleSpeedMove = 1f;
     public float fillAmount = 0.5f;
     [SerializeField]
     float Recovery = 1f;
-    [SerializeField]
-    float Thickness = 1f;
-    [Range(0, 1)]
-    public float CompensateShapeAmount;
+    public float Thickness = 1f;
+    [Range(0f, .5f)]
+    public float foamSmoothness = 0;
+    public Color foamColor;
+    public float foamWidth;
+    public float rimPower;
+    public Color rimColor;
+
+    float CompensateShapeAmount;
     [SerializeField]
     Mesh mesh;
     [SerializeField]
@@ -43,7 +48,14 @@ public class Liquid : MonoBehaviour
     void Awake()
     {
         GetMeshAndRend();
+
         color = rend.material.GetColor("_BottomColor");
+        topColor = rend.material.GetColor("_TopColor");
+        foamSmoothness = rend.material.GetFloat("_Foam_Smoothness");
+        foamColor = rend.material.GetColor("_FoamColor");
+        foamWidth = rend.material.GetFloat("_FoamWidth");
+        rimPower = rend.material.GetFloat("_Rim_Power");
+        rimColor = rend.material.GetColor("_Rim_Color");
     }
 
     private void OnValidate()
@@ -110,7 +122,6 @@ public class Liquid : MonoBehaviour
         // send it to the shader
         rend.material.SetFloat("_WobbleX", wobbleAmountX);
         rend.material.SetFloat("_WobbleZ", wobbleAmountZ);
-        
 
         // set fill amount
         UpdatePos(deltaTime);
@@ -119,8 +130,13 @@ public class Liquid : MonoBehaviour
         lastPos = transform.position;
         lastRot = transform.rotation;
 
-        //get color
         rend.material.SetColor("_BottomColor", color);
+        rend.material.SetColor("_TopColor", topColor);
+        rend.material.SetFloat("_Foam_Smoothness", foamSmoothness);
+        rend.material.SetColor("_FoamColor", foamColor);
+        rend.material.SetFloat("_FoamWidth", foamWidth);
+        rend.material.SetFloat("_Rim_Power", rimPower);
+        rend.material.SetColor("_Rim_Color", rimColor);
     }
 
     void UpdatePos(float deltaTime)

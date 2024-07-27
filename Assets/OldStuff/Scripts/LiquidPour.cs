@@ -8,7 +8,7 @@ public class LiquidPour : MonoBehaviour
     private float yMax;
     private float yMin;
 
-    public static LiquidPropertiesCollection liquids;
+    public LiquidPropertiesCollection liquids;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class LiquidPour : MonoBehaviour
             if (lv.fillAmount < 1f)
             {
                 lv.fillAmount += fillSpeed;
-                UpdateLiquidColor();
+                UpdateLiquid(lv, liquids.liquidPropertiesList[0], fillSpeed);
             }
             if (lv.fillAmount >= 1f)
             {
@@ -51,10 +51,18 @@ public class LiquidPour : MonoBehaviour
         return y;
     }
 
-    void UpdateLiquidColor()
+    public void UpdateLiquid(Liquid lv, LiquidProperties liquids, float speed)
     {
         // Assuming the Liquid script has a Color property for the liquid color
         Color currentColor = lv.color;
-        lv.color = Color.Lerp(currentColor, liquids.liquidPropertiesList[0].liquidColor, fillSpeed);
+        lv.color = Color.Lerp(currentColor, liquids.liquidColor, speed);
+        lv.topColor = Color.Lerp(currentColor, liquids.topColor, speed);
+        lv.MaxWobble = Mathf.Lerp(lv.MaxWobble, liquids.maxWobble, speed);
+        lv.Thickness = Mathf.Lerp(lv.Thickness,liquids.thickness, speed);
+        lv.foamSmoothness = Mathf.Lerp(lv.foamSmoothness,liquids.foamSmoothness, speed);
+        lv.foamColor = Color.Lerp(lv.foamColor, liquids.foamColor, speed);
+        lv.foamWidth = Mathf.Lerp(lv.foamWidth,liquids.foamWidth, speed);
+        lv.rimPower = Mathf.Lerp(lv.rimPower,liquids.rimPower, speed);
+        lv.rimColor = Color.Lerp(lv.rimColor, liquids.rimColor, speed);
     }
 }

@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281a0d4b1c26c33439294fa39c6688e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterColor: {r: 0, g: 0.34901962, b: 1, a: 1}
+  liquids: {fileID: 11400000, guid: 1b7442752a29f29489617172be1b15ce, type: 2}
 --- !u!1 &814737935547154959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,7 +1017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281a0d4b1c26c33439294fa39c6688e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterColor: {r: 0, g: 0, b: 1, a: 1}
+  liquids: {fileID: 11400000, guid: 1b7442752a29f29489617172be1b15ce, type: 2}
 --- !u!1 &3306314183554794994
 GameObject:
   m_ObjectHideFlags: 0
@@ -10767,7 +10767,6 @@ GameObject:
   - component: {fileID: 5556946596644445232}
   - component: {fileID: 2864479822428685566}
   - component: {fileID: 8533183418935707834}
-  - component: {fileID: 4751894393308156077}
   - component: {fileID: 200088821794063661}
   m_Layer: 0
   m_Name: LiquidVolume
@@ -10822,8 +10821,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10845,29 +10843,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4751894393308156077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3830675467079881420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2595917cf063659408258e782e3a83ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  liquidProperties: []
-  updateMode: 0
-  color: {r: 0.09868051, g: 0.7882353, b: 0, a: 1}
-  MaxWobble: 0.001
-  WobbleSpeedMove: 0.1
-  fillAmount: 0.5
-  Recovery: 1
-  Thickness: 0.5
-  CompensateShapeAmount: 0
-  mesh: {fileID: 4300008, guid: bafb5a85af06fa34a83f0b5de05b62cd, type: 3}
-  rend: {fileID: 8533183418935707834}
 --- !u!114 &200088821794063661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22196,7 +22171,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 4f180fd0909307b439fa41419a6f3344, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -22230,16 +22205,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2595917cf063659408258e782e3a83ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liquidProperties:
-  - {fileID: 11400000, guid: ad201ee9858e7f341a3b643996607550, type: 2}
   updateMode: 0
-  color: {r: 0, g: 0.34901962, b: 1, a: 1}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  topColor: {r: 0, g: 0, b: 0, a: 0}
   MaxWobble: 0.001
   WobbleSpeedMove: 0.1
   fillAmount: 0.5
   Recovery: 1
   Thickness: 1
-  CompensateShapeAmount: 0
+  foamSmoothness: 0
+  foamColor: {r: 0, g: 0, b: 0, a: 0}
+  foamWidth: 0
+  rimPower: 0
+  rimColor: {r: 0, g: 0, b: 0, a: 0}
   mesh: {fileID: 4300004, guid: 81f4f6567fa9bd345ac50687a30e04bf, type: 3}
   rend: {fileID: 5823684551377533769}
 --- !u!114 &1422172713612546734
