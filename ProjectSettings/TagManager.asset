@@ -5,20 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Container
-  - RedClip
-  - BlackClip
-  - ClipPos
-  - Nail
-  - MaleConnector
-  - Metal
-  - Salt
-  - Lamp
-  - Match
   - Tree
   - Flower
   - RootSpawner
-  - Root
   - EyeLevel
+  - Berry
+  - Wood
+  - Obsidian
+  - Root
   layers:
   - Default
   - TransparentFX
@@ -30,21 +24,21 @@ TagManager:
   - Player
   - Target
   - WaterLevel
-  - Wire
-  - Electrolysis
+  - Grabbable
   - Sink
-  - Powder
-  - FireLevel
-  - NailLayer
-  - Nail
-  - Connector
-  - Barrel
-  - BronzePlate
-  - Note
   - Trigger
-  - Flower
   - Tree
   - Surface
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
