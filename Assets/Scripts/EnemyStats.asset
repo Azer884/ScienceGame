@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7205c86032c79be47bd7bacbfa96bfb7, type: 3}
   m_Name: EnemyStats
   m_EditorClassIdentifier: 
-  strength: 10
-  HP: 200
-  speed: 10
-  attackSpeed: 1
+  strength: 7
+  HP: 120
+  speed: 5
+  attackSpeed: 1.5
   scale: 1
-  jump: 350
-  defense: 1.5
+  jump: 1
+  defense: 1

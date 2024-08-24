@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/OldStuff/Scenes/Level01.unity
-    guid: 9fc947b27b1e09640a4e14e5ad708845
+    path: Assets/Scene/MainMenu.unity
+    guid: 29f03d3040f17b74493fce648fb9019f
   - enabled: 1
-    path: Assets/OldStuff/Scenes/Level02.unity
-    guid: ca2fc751baf963d41aa38ef47734b1df
+    path: Assets/Scene/Loading.unity
+    guid: 5d878d294277ddf43872332e2580e774
   - enabled: 1
-    path: Assets/OldStuff/Scenes/Level03.unity
-    guid: 42a761394109bd8418648b86c8a2ffd9
+    path: Assets/Scene/Island.unity
+    guid: a75ebd60c04b4f14186b4d13775372f8
   - enabled: 1
-    path: Assets/OldStuff/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scene/Arena.unity
+    guid: 265c3124455cde849b37444f76ca75e8
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

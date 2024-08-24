@@ -1,175 +1,205 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private PlayerStats stats; 
-    private Vector3 PlayerMovement;
-    private Vector2 PlayerMouse;
-    private float xRot;
-    private bool isCrouching = false;
+    private PlayerInput inputActions;
+    private CharacterController controller;
 
-    [SerializeField] private Transform PlayerCam;
-    [SerializeField] private Transform GroundCheck;
-    [SerializeField] private LayerMask FloorMask;
-    [SerializeField] private Rigidbody rb;
+    [SerializeField] private Camera cam;
+    [SerializeField] public float lookSensitivity = 1.0f;
+    private float xRotation = 0f;
 
-    [SerializeField] private float crouchHeight = 0.5f;
-    [SerializeField] private float Sens;
-    [HideInInspector] public bool isSwimming = false;
+    // Movement Vars
+    private Vector3 velocity;
+    public float gravity = -9.81f;
+    private bool grounded;
+    private float speedMultiplier = 1.0f;
+
+    // Crouch Vars
+    private float initHeight;
+    private Vector3 initCenter;
+    [SerializeField] private float crouchHeight;
+    [SerializeField] private Vector3 crouchCenter;
+    [SerializeField] private Transform standingCameraPosition;
+    [SerializeField] private Transform crouchingCameraPosition;
+    public PlayerStats[] stats;
+    public int index;
+    public PotionLists potions;
+    private Dictionary<string, int> potionIndexMap = new Dictionary<string, int>
+    {
+        {"Attack Speed Potion", 1},
+        {"Defense Potion", 2},
+        {"Health Potion", 3},
+        {"Jump Boost Potion", 4},
+        {"Scale Down Potion", 5},
+        {"Scale Up Potion", 6},
+        {"Speed Potion", 7},
+        {"Strength Potion", 8},
+        {"Scale Enemy Down Potion", 9},
+        {"Scale Enemy Up Potion", 10},
+        {"Freezing Potion", 11},
+        {"Enemy Untouchable Potion", 12},
+        {"Poison Potion", 13},
+        {"Help Potion", 14},
+        {"Second Life Potion", 15},
+        {"Untouchable Potion", 16}
+    };
 
     // Swimming
+    public bool isSwimming;
     [SerializeField] private float swimSpeed = 3f;
-    [SerializeField] private Vector2 swimmingColliderSize = new Vector2(1f, 0.5f);
-    private Vector2 originalColliderSize;
-    private CapsuleCollider playerCollider;
 
-    // Sprinting
-    [SerializeField] private float sprintSpeed = 7f;
-    private float originalSpeed;
-    
+    private void Awake()
+    {
+        inputActions = new PlayerInput();
+    }
 
     private void Start()
     {
+        controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
-        playerCollider = GetComponentInChildren<CapsuleCollider>();
-        originalColliderSize = new Vector2(playerCollider.radius, playerCollider.height);
-        originalSpeed = stats.speed;
+        initHeight = controller.height;
+        initCenter = controller.center;
+        
+        
     }
 
-    void Update()
+    private void OnEnable()
     {
-        PlayerMouse = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        MoveCam();
+        inputActions.Enable();
+    }
 
+    private void Update()
+    {
+        if (GetComponent<TeleportationController>().isInArena && inputActions.PlayerControls.Use.triggered)
+        {
+            ChangePlayerStats(potions.stringLists.Last());
+            if (new[] { 11, 12, 13, 14, 15, 16 }.Contains(index))
+            {
+                index = 0;
+            }
+            Debug.Log("workinggg");
+            transform.localScale *= stats[index].scale;
+        }
+        DoMovement();
+        DoLooking();
+        DoCrouch();
+
+    }
+
+    private void ChangePlayerStats(string potionName)
+    {
+        if (potionIndexMap.TryGetValue(potionName, out int newIndex))
+        {
+            index = newIndex;
+        }
+    }
+
+    private void DoLooking()
+    {
+        Vector2 looking = GetPlayerLook();
+        float lookX = looking.x * lookSensitivity * Time.deltaTime;
+        float lookY = looking.y * lookSensitivity * Time.deltaTime;
+
+        xRotation -= lookY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.Rotate(Vector3.up * lookX);
+    }
+
+    private void DoMovement()
+    {
         if (!isSwimming)
         {
-            PlayerMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            rb.useGravity = true;
-            playerCollider.height = originalColliderSize.y;
-            playerCollider.radius = originalColliderSize.x;
-
-            if (Input.GetButtonDown("Jump"))
+            controller.height = initHeight;
+            controller.center = initCenter;
+            grounded = controller.isGrounded;
+            if (grounded && velocity.y < 0)
             {
-                Jump();
+                velocity.y = -2f;
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftControl) && !isCrouching)
+            Vector2 movement = GetPlayerMovement();
+            speedMultiplier = inputActions.PlayerControls.Run.ReadValue<float>() > 0 && movement.y > 0 ? 2.0f : 1.0f;
+
+            Vector3 move = transform.right * movement.x + transform.forward * movement.y;
+            controller.Move(move * stats[index].speed * speedMultiplier * Time.deltaTime);
+
+            // Jumping
+            if (grounded && inputActions.PlayerControls.Jump.triggered)
             {
-                Crouch();
-            }
-            else if (Input.GetKeyUp(KeyCode.LeftControl) && isCrouching)
-            {
-                StandUp();
+                velocity.y = Mathf.Sqrt(stats[index].jump * -2f * gravity);
             }
 
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                Sprint();
-            }
-            else
-            {
-                StopSprinting();
-            }
-
-            MoveCharacter();
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
         }
         else
         {
+            controller.height = crouchHeight;
             HandleSwimming();
         }
     }
 
-    void HandleSwimming()
+    private void HandleSwimming()
     {
-        if (rb.useGravity)
-        {
-            rb.useGravity = false;
-        }
-
-        playerCollider.height = swimmingColliderSize.y;
-        playerCollider.radius = swimmingColliderSize.x;
-
         Vector3 swimMovement = Vector3.zero;
-        if (Input.GetAxisRaw("Vertical") > 0)
-        {
-            swimMovement += PlayerCam.forward;
-        }
-        else if (Input.GetAxisRaw("Vertical") < 0)
-        {
-            swimMovement -= PlayerCam.forward;
-        }
-        if (Input.GetAxisRaw("Horizontal") > 0)
-        {
-            swimMovement += PlayerCam.right;
-        }
-        else if (Input.GetAxisRaw("Horizontal") < 0)
-        {
-            swimMovement -= PlayerCam.right;
-        }
 
-        // Move up when space bar is pressed
-        if (Input.GetKey(KeyCode.Space))
+        Vector2 movement = GetPlayerMovement();
+        swimMovement += cam.transform.right * movement.x + cam.transform.forward * movement.y;
+
+        if (inputActions.PlayerControls.Jump.ReadValue<float>() > 0)
         {
             swimMovement += Vector3.up;
         }
 
-        // Move down when left shift is pressed (optional)
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (inputActions.PlayerControls.Crouch.ReadValue<float>() > 0)
         {
             swimMovement -= Vector3.up;
         }
 
-        transform.position += swimMovement.normalized * swimSpeed * Time.deltaTime;
+        controller.Move(swimMovement * swimSpeed * Time.deltaTime);
     }
 
-    void MoveCharacter()
+    private void DoCrouch()
     {
-        Vector3 MoveVector = transform.TransformDirection(PlayerMovement) * stats.speed;
-        rb.velocity = new Vector3(MoveVector.x, rb.velocity.y, MoveVector.z);
-    }
-
-    void MoveCam()
-    {
-        xRot -= PlayerMouse.y * Sens;
-        xRot = Mathf.Clamp(xRot, -90f, 90f);
-
-        transform.Rotate(0f, PlayerMouse.x * Sens, 0f);
-        PlayerCam.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
-    }
-
-    void Jump()
-    {
-        if (Physics.CheckSphere(GroundCheck.position, 0.1f, FloorMask))
+        if (!isSwimming)
         {
-            rb.AddForce(Vector3.up * stats.jump, ForceMode.Impulse);
+            if (inputActions.PlayerControls.Crouch.ReadValue<float>() > 0)
+            {
+                controller.height = crouchHeight;
+                controller.center = crouchCenter;
+                cam.transform.position = Vector3.Lerp(cam.transform.position, crouchingCameraPosition.position, Time.deltaTime * 10f);
+            }
+            else
+            {
+                if (!Physics.Raycast(transform.position, Vector3.up, 2.0f))
+                {
+                    controller.height = initHeight;
+                    controller.center = initCenter;
+                    cam.transform.position = standingCameraPosition.position;
+                }
+            }
         }
     }
 
-    void Crouch()
+    private void OnDisable()
     {
-        playerCollider.height = crouchHeight;
-        isCrouching = true;
+        inputActions.Disable();
     }
 
-    void StandUp()
+    public Vector2 GetPlayerMovement()
     {
-        playerCollider.height = originalColliderSize.y;
-        isCrouching = false;
+        return inputActions.PlayerControls.Move.ReadValue<Vector2>();
     }
 
-    void Sprint()
+    public Vector2 GetPlayerLook()
     {
-        stats.speed = sprintSpeed;
-    }
-
-    void StopSprinting()
-    {
-        stats.speed = originalSpeed;
-    }
-
-    public void ResetVelocity()
-    {
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        return inputActions.PlayerControls.Look.ReadValue<Vector2>();
     }
 }

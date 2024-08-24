@@ -18,7 +18,7 @@ public class UiManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit raycastHit, layerMask))
+        if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit raycastHit, 10f, layerMask))
         {
 
             Objectname.text = raycastHit.transform.name + "\n";
@@ -37,35 +37,6 @@ public class UiManager : MonoBehaviour
 
                     else if(lv.fillAmount > 0.01f)
                     {
-                        if (ColorCheck(lv.color, color[0]))
-                        {
-                            Objectname.text += " (H<sub>2</sub>O)";
-                        }
-
-                        if (ColorCheck(lv.color, color[0]))
-                        {
-                            Objectname.text += " (Cu<sup>2+</sup> , SO<sub>4</sub><sup>2-</sup>)";
-                        }
-                        else if (ColorCheck(lv.color, color[1]))
-                        {
-                            Objectname.text += " (Fe<sup>2+</sup>)";
-                        }
-                        else if (ColorCheck(lv.color, color[2]))
-                        {
-                            Objectname.text += " (H<sub>3</sub>O<sup>+</sup> , Cl<sup>-</sup>)";
-                        }
-                        else if (ColorCheck(lv.color, color[3]))
-                        {
-                            Objectname.text += " (Ag<sup>+</sup> , NO<sub>3</sub><sup>-</sup>)";
-                        }
-                        else if (ColorCheck(lv.color, color[4]))
-                        {
-                            Objectname.text += " (Cu<sup>2+</sup>)";
-                        }
-                        else if (ColorCheck(lv.color, color[5]))
-                        {
-                            Objectname.text += " (Na<sup>+</sup>, OH<sup>-</sup>)";
-                        }
 
                         Objectname.text += " " + (int)(lv.fillAmount * 100) + "%";
                     }
@@ -98,6 +69,8 @@ public class UiManager : MonoBehaviour
 
     string RemoveNumbers(string str)
     {
+        str = str.Replace("(Clone)", string.Empty);
+
         StringBuilder result = new();
 
         foreach (char c in str)

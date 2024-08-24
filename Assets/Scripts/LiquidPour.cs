@@ -3,7 +3,7 @@ using UnityEngine;
 public class LiquidPour : MonoBehaviour
 {
     private Quaternion OriginalRotation;
-    private float fillSpeed = 2f;
+    private float fillSpeed = 5f;
     private Liquid lv;
     private float yMax;
     private float yMin;
@@ -35,6 +35,7 @@ public class LiquidPour : MonoBehaviour
             if (lv.fillAmount >= 1f)
             {
                 transform.localRotation = Quaternion.Euler(Random.value * 30 - 15, Random.value * 30 - 15, Random.value * 30 - 15);
+                lv.fillAmount = Mathf.Min(lv.fillAmount, 1f);
             }
             else
             {

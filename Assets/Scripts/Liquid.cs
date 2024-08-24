@@ -1,4 +1,4 @@
-using System.Collections;
+-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -45,6 +45,7 @@ public class Liquid : MonoBehaviour
     Vector3 comp;
     public PotionLists combos;
     public PotionLists potions;
+    public bool potionCreated; 
 
     private static readonly Dictionary<string, string[]> potionCombinations = new Dictionary<string, string[]>
     {
@@ -54,13 +55,13 @@ public class Liquid : MonoBehaviour
         {"Poison Potion", new[] {"Flower", "Obsidian", "Wood"}},
         {"Attack Speed Potion", new[] {"Flower", "Root", "Obsidian", "Wood"}},
         {"Jump Boost Potion", new[] {"Flower", "Berry", "Root", "Obsidian"}},
-        {"Night Vision Potion", new[] {"Flower", "Berry", "Root"}},
+        {"Help Potion", new[] {"Flower", "Berry", "Root"}},
         {"Scale Down Potion", new[] {"Flower", "Root", "Wood"}},
         {"Health Potion", new[] {"Flower", "Berry", "Obsidian", "Wood"}},
-        {"Invisibility Potion", new[] {"Flower", "Root", "Obsidian"}},
+        {"Untouchable Potion", new[] {"Flower", "Root", "Obsidian"}},
         {"Scale Up Potion", new[] {"Berry", "Obsidian", "Wood"}},
-        {"Dizziness Potion", new[] {"Flower", "Berry", "Obsidian"}},
-        {"Enemy Invisibility Potion", new[] {"Flower", "Berry", "Root", "Wood"}},
+        {"Freezing Potion", new[] {"Flower", "Berry", "Obsidian"}},
+        {"Enemy Untouchable Potion", new[] {"Flower", "Berry", "Root", "Wood"}},
         {"Scale Enemy Down Potion", new[] {"Flower", "Berry", "Wood"}},
         {"Scale Enemy Up Potion", new[] {"Berry", "Root", "Obsidian", "Wood"}},
         {"Second Life Potion", new[] {"Flower", "Berry", "Root", "Obsidian", "Wood"}}
@@ -69,6 +70,7 @@ public class Liquid : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        potionCreated = false; 
         combos.stringLists.Clear();
 
         GetMeshAndRend();
@@ -297,6 +299,7 @@ public class Liquid : MonoBehaviour
             {
                 potions.stringLists.Add(potionName);
                 GameObject.Find("UnlockPotion").GetComponent<Animator>().Play("Congrats");
+                potionCreated = true;
             }
         }
     }

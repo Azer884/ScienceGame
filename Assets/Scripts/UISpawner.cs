@@ -16,7 +16,7 @@ public class UISpawner : MonoBehaviour
         {
             SpawnedObj.transform.GetChild(0).TryGetComponent(out animator);
         }
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 2f, Layer))
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 10f, Layer))
         {
             Vector3 spawnPosition = hit.point;
             if (SpawnedObj == null)

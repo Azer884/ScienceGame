@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: 5
   HP: 100
-  speed: 10
+  speed: 7
   attackSpeed: 1
   scale: 1
-  jump: 350
+  jump: 1.25
   defense: 1

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -45,20 +44,12 @@ public class TimeManager : MonoBehaviour
 
     private float tempSecond;
 
-    private GameObject[] flowers;
-    private GameObject[] roots;
-
     private Texture2D initialTexture1;
     private Texture2D initialTexture2;
     private float initialBlend;
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
-
-        flowers = GameObject.FindGameObjectsWithTag("Flower");
-        roots = GameObject.FindGameObjectsWithTag("Root");
-        NightItemsSpawner(false);
         SetInitialLightRotation();
 
         // Store initial shader values
@@ -77,10 +68,10 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
-        tempSecond += Time.deltaTime;
+        tempSecond += Time.deltaTime * 3;
 
         // Rotate the light based on time progression
-        float rotationSpeed = 360f / (10f * 60f); // 360 degrees per game day (10 real-life minutes in a day)
+        float rotationSpeed = 360f / (8f * 60f); // 360 degrees per game day (10 real-life minutes in a day)
         globalLight.transform.Rotate(Vector3.right, rotationSpeed * Time.deltaTime, Space.World);
 
         if (tempSecond >= 1)
@@ -106,11 +97,7 @@ public class TimeManager : MonoBehaviour
         }
         if (Hours >= 24)
         {
-            daysNumber.text = "Day ";
             Hours = 0;
-            Days++;
-            daysNumber.text += Days;
-            daysNumber.GetComponent<Animator>().Play("FadeIn");
         }
     }
 
@@ -120,7 +107,6 @@ public class TimeManager : MonoBehaviour
         {
             StartCoroutine(LerpSkybox(skyboxNight, skyboxSunrise, 10f));
             StartCoroutine(LerpLight(graddientNightToSunrise, 10f));
-            NightItemsSpawner(false);
         }
         else if (value == 8)
         {
@@ -131,24 +117,11 @@ public class TimeManager : MonoBehaviour
         {
             StartCoroutine(LerpSkybox(skyboxDay, skyboxSunset, 10f));
             StartCoroutine(LerpLight(graddientDayToSunset, 10f));
-            NightItemsSpawner(true);
         }
         else if (value == 22)
         {
             StartCoroutine(LerpSkybox(skyboxSunset, skyboxNight, 10f));
             StartCoroutine(LerpLight(graddientSunsetToNight, 10f));
-        }
-    }
-
-    private void NightItemsSpawner(bool spawn)
-    {
-        foreach (GameObject flower in flowers)
-        {
-            flower.SetActive(spawn);
-        }
-        foreach (GameObject root in roots)
-        {
-            root.SetActive(spawn);
         }
     }
 
@@ -173,5 +146,21 @@ public class TimeManager : MonoBehaviour
             RenderSettings.fogColor = globalLight.color;
             yield return null;
         }
+    }
+
+    public void TeleportToArena()
+    {
+        Hours = 23;
+        Minutes = 0;
+    }
+
+    public void TeleportBackFromArena()
+    {
+        Days++;
+        Hours = 7;
+        Minutes = 0;
+        daysNumber.text = "Day ";
+        daysNumber.text += Days;
+        daysNumber.GetComponent<Animator>().Play("FadeIn");
     }
 }
